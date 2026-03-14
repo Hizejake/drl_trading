@@ -156,7 +156,8 @@ def parse_lobster_data(ticker="AAPL", data_dir=DATA_DIR):
     for col in out_cols:
         df_out[col] = df_ob[col].values
     
-    csv_path = os.path.join(data_dir, f"lobster_{ticker.lower()}_10_level.csv")
+    # Save to current working directory (e.g. /kaggle/working)
+    csv_path = f"lobster_{ticker.lower()}_10_level.csv"
     df_out.to_csv(csv_path, index=False)
     
     mid = (df_out["bid_price_1"] + df_out["ask_price_1"]) / 2
@@ -179,7 +180,7 @@ def generate_synthetic_lob(ticks=5000, data_dir=DATA_DIR):
     df = pd.DataFrame(data)
     df.insert(0, "timestamp", pd.date_range("2024-01-01 09:30:00", periods=ticks, freq="100ms"))
     df.insert(1, "symbol", "SYNTH")
-    path = os.path.join(data_dir, "synthetic_lob_10_level.csv")
+    path = "synthetic_lob_10_level.csv"
     df.to_csv(path, index=False)
     print(f"Synthetic: {ticks} ticks saved to {path}")
     return path""")
@@ -188,10 +189,16 @@ def generate_synthetic_lob(ticks=5000, data_dir=DATA_DIR):
 # CELL 5: Parse Data
 # ═══════════════════════════════════════════════════════════════════════════════
 code("""# ── Parse / Generate Data ──────────────────────────────────────────────────────
-parsed_path = os.path.join(DATA_DIR, f"lobster_{TICKER}_10_level.csv")
-if os.path.exists(parsed_path):
-    print(f"Using existing parsed data: {parsed_path}")
-    DATA_PATH = parsed_path
+# Check if a pre-parsed file already exists in either the working dir or DATA_DIR
+local_parsed = f"lobster_{TICKER.lower()}_10_level.csv"
+dataset_parsed = os.path.join(DATA_DIR, local_parsed)
+
+if os.path.exists(local_parsed):
+    print(f"Using existing parsed data: {local_parsed}")
+    DATA_PATH = local_parsed
+elif os.path.exists(dataset_parsed):
+    print(f"Using parsed data from dataset: {dataset_parsed}")
+    DATA_PATH = dataset_parsed
 else:
     DATA_PATH = parse_lobster_data(TICKER.upper(), data_dir=DATA_DIR)
 
