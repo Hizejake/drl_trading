@@ -1,0 +1,38 @@
+# Environment variables & secrets
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Data files (large, user must download themselves)
+data/raw/*.csv
+data/raw/*.zip
+data/raw/*.dbn*
+data/raw/*.npz
+
+# Model checkpoints (large binary files)
+notebooks/models/*.zip
+notebooks/models/*.pkl
+
+# Training logs (regenerated)
+notebooks/training_log_*.csv
+
+# Dashboard output
+notebooks/backtest_dashboard.html
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
