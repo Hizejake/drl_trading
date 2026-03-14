@@ -853,6 +853,7 @@ if OPENROUTER_API_KEY:
     print(f"\\n✅ Embedded and saved macro vectors to {MACRO_VECTORS_PATH}")
 else:
     print("No OPENROUTER_API_KEY set. The RL environment will default to using randomly generated macro vectors.")
+""")
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # CELL 16: Scale Up Instructions
