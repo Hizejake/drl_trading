@@ -800,7 +800,7 @@ if OPENROUTER_API_KEY:
             ], response_format={"type": "json_object"}, temperature=0.3, max_tokens=200)
             content = resp.choices[0].message.content
             import re
-            js = json.loads(re.sub(r'```(?:json)?\s*', '', content).strip().rstrip('`').strip())
+            js = json.loads(re.sub(r'```(?:json)?\\s*', '', content).strip().rstrip('`').strip())
             return {"persona": name, "parsed": js, "error": None}
         except Exception as e:
             return {"persona": name, "parsed": None, "error": str(e)}
