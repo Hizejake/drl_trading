@@ -858,7 +858,7 @@ else:
 # ═══════════════════════════════════════════════════════════════════════════════
 # CELL 16: Scale Up Instructions
 # ═══════════════════════════════════════════════════════════════════════════════
-md("""## 🚀 Scale Up for Real Training
+md(r"""## 🚀 Scale Up for Real Training
 
 To run full-scale training, update the config cell at the top:
 
