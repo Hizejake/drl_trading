@@ -64,11 +64,20 @@ DATA_DIR = "data/raw"
 MODELS_DIR = "models"
 os.makedirs(MODELS_DIR, exist_ok=True)
 
-# API key for LLM Swarm (optional — leave empty to skip swarm)
-OPENROUTER_API_KEY = ""  # "sk-or-v1-your-key-here"
+# API key for LLM Swarm
+OPENROUTER_API_KEY = ""
+
+# Try to load from Kaggle Secrets securely if running on Kaggle
+try:
+    from kaggle_secrets import UserSecretsClient
+    user_secrets = UserSecretsClient()
+    OPENROUTER_API_KEY = user_secrets.get_secret("OPENROUTER_API_KEY")
+    print("Successfully loaded OPENROUTER_API_KEY from Kaggle Secrets")
+except Exception:
+    pass
 
 # Training config
-TRAIN_TIMESTEPS = 10_000   # Small scale test (set to 500_000+ for real training)
+TRAIN_TIMESTEPS = 500_000   # Full scale run
 REWARD_TYPE = "log_return"  # "log_return" | "sharpe" | "pnl"
 TICKER = "aapl"             # Which LOBSTER dataset to use
 
