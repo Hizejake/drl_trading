@@ -752,24 +752,108 @@ Run the 5-persona LLM swarm on sample news events. **Requires `OPENROUTER_API_KE
 Skip this cell if you don't have an API key — the model will use random macro vectors instead.
 """)
 
-code("""# ── LLM Swarm (Optional — uncomment and run if you have an API key) ────────
-# This cell is intentionally commented out to avoid API costs.
-# Uncomment to run the 5-persona swarm on sample news events.
+code("""# ── LLM Swarm (Optional — runs if OPENROUTER_API_KEY is set) ─────────────────
+import asyncio, json
+from litellm import acompletion
+from sentence_transformers import SentenceTransformer
 
-# if OPENROUTER_API_KEY:
-#     os.environ["OPENROUTER_API_KEY"] = OPENROUTER_API_KEY
-#     from litellm import acompletion
-#     import litellm
-#     from sentence_transformers import SentenceTransformer
-#     
-#     # ... (swarm code would go here)
-#     # For the full swarm implementation, see macro/swarm.py in the repo
-#     print("Swarm integration ready — use macro/run_swarm_batch.py to generate vectors")
-# else:
-#     print("No API key set — skipping LLM swarm. Using random macro vectors.")
+if OPENROUTER_API_KEY:
+    os.environ["OPENROUTER_API_KEY"] = OPENROUTER_API_KEY
+    print("Running LLM Swarm to generate Macro Vectors...")
+    
+    PERSONAS = {
+        "momentum": (
+            "You are a momentum trader. Predict if initial price move continues. "
+            "Respond ONLY with valid JSON: {'direction': 'up'|'down'|'neutral', 'magnitude': 0.0-1.0, 'confidence': 0.0-1.0, 'reasoning': '...'}"
+        ),
+        "mean_reversion": (
+            "You are a mean-reversion trader. Predict if initial price move fades. "
+            "Respond ONLY with valid JSON: {'direction': 'up'|'down'|'neutral', 'magnitude': 0.0-1.0, 'confidence': 0.0-1.0, 'reasoning': '...'}"
+        ),
+        "macro_risk": (
+            "You are a macro risk analyst. Assess SYSTEMIC RISK flows. "
+            "Respond ONLY with valid JSON: {'direction': 'up'|'down'|'neutral', 'magnitude': 0.0-1.0, 'confidence': 0.0-1.0, 'reasoning': '...'}"
+        ),
+        "liquidity": (
+            "You are a liquidity analyst. Predict BID-ASK SPREAD effect ('up' = wider spreads). "
+            "Respond ONLY with valid JSON: {'direction': 'up'|'down'|'neutral', 'magnitude': 0.0-1.0, 'confidence': 0.0-1.0, 'reasoning': '...'}"
+        ),
+        "volatility": (
+            "You are a volatility trader. Predict REALIZED VOLATILITY effect. "
+            "Respond ONLY with valid JSON: {'direction': 'up'|'down'|'neutral', 'magnitude': 0.0-1.0, 'confidence': 0.0-1.0, 'reasoning': '...'}"
+        )
+    }
+    
+    PERSONA_MODELS = {
+        "momentum":       "openrouter/nvidia/nemotron-3-super-120b-a12b:free",
+        "mean_reversion": "openrouter/nvidia/nemotron-3-nano-30b-a3b:free",
+        "macro_risk":     "openrouter/nvidia/nemotron-nano-9b-v2:free",
+        "liquidity":      "openrouter/mistralai/mistral-small-3.1-24b-instruct:free",
+        "volatility":     "openrouter/arcee-ai/trinity-large-preview:free",
+    }
+    
+    async def _call_agent(name, prompt, text, model):
+        try:
+            resp = await acompletion(model=model, messages=[
+                {"role": "system", "content": prompt},
+                {"role": "user", "content": f"Analyze:\\n\\n{text}"}
+            ], response_format={"type": "json_object"}, temperature=0.3, max_tokens=200)
+            content = resp.choices[0].message.content
+            import re
+            js = json.loads(re.sub(r'```(?:json)?\s*', '', content).strip().rstrip('`').strip())
+            return {"persona": name, "parsed": js, "error": None}
+        except Exception as e:
+            return {"persona": name, "parsed": None, "error": str(e)}
 
-print("ℹ️  To run the LLM swarm: set OPENROUTER_API_KEY above and run macro/run_swarm_batch.py")
-print("   The training pipeline automatically loads cached vectors from data/raw/macro_vectors.npz")""")
+    async def run_swarm(event_text):
+        tasks = [_call_agent(n, p, event_text, PERSONA_MODELS[n]) for n, p in PERSONAS.items()]
+        return await asyncio.gather(*tasks)
+
+    def aggregate_consensus(results):
+        dir_map = {"up": 1.0, "down": -1.0, "neutral": 0.0}
+        w_dir, t_conf = 0.0, 0.0
+        mags, dirs, reas = [], [], []
+        
+        for r in results:
+            if r["error"]: continue
+            p = r["parsed"]
+            conf = float(p.get("confidence", 0.5))
+            d = dir_map.get(str(p.get("direction", "neutral")).lower(), 0.0)
+            w_dir += d * conf; t_conf += conf
+            mags.append(float(p.get("magnitude", 0)))
+            dirs.append(d)
+            reas.append(f"[{r['persona']}]: {p.get('reasoning', '')}")
+            
+        c_dir = (w_dir / t_conf) if t_conf > 0 else 0.0
+        return {
+            "combined_reasoning": " ".join(reas),
+            "consensus_direction": c_dir,
+        }
+
+    # Generate synthetic news events (since GDELT parsing requires extra dataset setup)
+    sample_events = [
+        "Federal Reserve unexpectedly cuts interest rates by 50bps, citing inflation cooling faster than expected.",
+        "Major tech earnings report shows 15% revenue miss across semiconductor sector, leading to massive selloff."
+    ]
+    
+    macro_vectors = []
+    print("Loading SentenceTransformer...")
+    encoder = SentenceTransformer("all-MiniLM-L6-v2")
+    
+    for i, event in enumerate(sample_events):
+        print(f"\\nProcessing Event {i+1}: {event[:80]}...")
+        # Since notebooks run async loop already, we can use await directly in Kaggle/Jupyter
+        swarm_res = await run_swarm(event)
+        consensus = aggregate_consensus(swarm_res)
+        emb = encoder.encode(consensus["combined_reasoning"], convert_to_numpy=True)
+        macro_vectors.append(emb)
+        print(f"  Swarm Consensus Dir: {consensus['consensus_direction']:.2f}")
+    
+    np.savez(os.path.join(DATA_DIR, "macro_vectors.npz"), embeddings=np.array(macro_vectors, dtype=np.float32))
+    MACRO_VECTORS_PATH = os.path.join(DATA_DIR, "macro_vectors.npz")
+    print(f"\\n✅ Embedded and saved macro vectors to {MACRO_VECTORS_PATH}")
+else:
+    print("No OPENROUTER_API_KEY set. The RL environment will default to using randomly generated macro vectors.")
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # CELL 16: Scale Up Instructions
