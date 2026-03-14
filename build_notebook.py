@@ -867,7 +867,7 @@ REWARD_TYPE = "log_return"  # best for HFT
 TICKER = "aapl"             # try different tickers
 ```
 
-Then re-run all cells. With a Kaggle GPU (T4/P100), 500K steps should take 15-30 minutes.
+Then re-run all cells. With a Kaggle GPU (T4 or P100), 500K steps should take 15-30 minutes.
 
 ### Tips:
 - **Compare tickers**: Train on AAPL, MSFT, INTC to see how the model generalizes
