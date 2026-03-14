@@ -203,7 +203,7 @@ else:
     DATA_PATH = parse_lobster_data(TICKER.upper(), data_dir=DATA_DIR)
 
 df_preview = pd.read_csv(DATA_PATH, nrows=5)
-print(f"\\nData shape: {pd.read_csv(DATA_PATH).shape}")
+print(r"\nData shape: {pd.read_csv(DATA_PATH).shape}")
 df_preview.head()""")
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -494,7 +494,7 @@ class MetricsLoggerCallback(BaseCallback):
 
 def train_model(data_path, use_cvml=True, total_timesteps=10000, reward_type="log_return"):
     name = "PPO+CVML" if use_cvml else "PPO+FlatMLP"
-    print(f"\\n{'='*60}")
+    print(r"\n{'='*60}")
     print(f"Training {name} | {total_timesteps:,} steps | reward={reward_type} | device={DEVICE}")
     print(f"{'='*60}")
     
@@ -520,7 +520,7 @@ def train_model(data_path, use_cvml=True, total_timesteps=10000, reward_type="lo
     
     save_name = "ppo_cvml_final" if use_cvml else "ppo_flat_final"
     model.save(os.path.join(MODELS_DIR, save_name))
-    print(f"\\n{name} trained in {elapsed:.1f}s ({elapsed/60:.1f}min)")
+    print(r"\n{name} trained in {elapsed:.1f}s ({elapsed/60:.1f}min)")
     return model, logger
 
 print("Training function defined ✓")""")
@@ -626,7 +626,7 @@ for fn in [run_twap, run_vwap, run_random]:
     all_stats.append(fn(env))
 
 # Print comparison table
-print(f"\\n{'='*95}")
+print(r"\n{'='*95}")
 print(f"{'EVALUATION RESULTS':^95}")
 print(f"{'='*95}")
 print(f"{'Model':>15} {'Return%':>10} {'Sharpe':>10} {'MaxDD%':>10} {'Trades':>8} {'Buy':>6} {'Sell':>6} {'Final PV':>12} {'Inv':>6}")
@@ -800,7 +800,7 @@ if OPENROUTER_API_KEY:
             ], response_format={"type": "json_object"}, temperature=0.3, max_tokens=200)
             content = resp.choices[0].message.content
             import re
-            js = json.loads(re.sub(r'```(?:json)?\\s*', '', content).strip().rstrip('`').strip())
+            js = json.loads(re.sub(r'```(?:json)?\s*', '', content).strip().rstrip('`').strip())
             return {"persona": name, "parsed": js, "error": None}
         except Exception as e:
             return {"persona": name, "parsed": None, "error": str(e)}
@@ -841,7 +841,7 @@ if OPENROUTER_API_KEY:
     encoder = SentenceTransformer("all-MiniLM-L6-v2")
     
     for i, event in enumerate(sample_events):
-        print(f"\\nProcessing Event {i+1}: {event[:80]}...")
+        print(r"\nProcessing Event {i+1}: {event[:80]}...")
         # Since notebooks run async loop already, we can use await directly in Kaggle/Jupyter
         swarm_res = await run_swarm(event)
         consensus = aggregate_consensus(swarm_res)
@@ -851,7 +851,7 @@ if OPENROUTER_API_KEY:
     
     np.savez(os.path.join(DATA_DIR, "macro_vectors.npz"), embeddings=np.array(macro_vectors, dtype=np.float32))
     MACRO_VECTORS_PATH = os.path.join(DATA_DIR, "macro_vectors.npz")
-    print(f"\\n✅ Embedded and saved macro vectors to {MACRO_VECTORS_PATH}")
+    print(r"\n✅ Embedded and saved macro vectors to {MACRO_VECTORS_PATH}")
 else:
     print("No OPENROUTER_API_KEY set. The RL environment will default to using randomly generated macro vectors.")
 
