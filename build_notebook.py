@@ -36,6 +36,7 @@ from gymnasium import spaces
 from stable_baselines3 import PPO
 from stable_baselines3.common.torch_layers import BaseFeaturesExtractor
 from stable_baselines3.common.callbacks import BaseCallback, CheckpointCallback
+from stable_baselines3.common.logger import configure
 
 os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
 
@@ -631,6 +632,11 @@ def train_model(data_path, use_cvml=True, total_timesteps=10000, reward_type="lo
         ent_coef=0.01, vf_coef=0.5, max_grad_norm=0.5,
         verbose=1, device=DEVICE,
     )
+    
+    logger_dir = os.path.join(MODELS_DIR, f"logs_{name.replace('+', '_')}")
+    os.makedirs(logger_dir, exist_ok=True)
+    new_logger = configure(logger_dir, ["stdout", "csv", "tensorboard", "log"])
+    model.set_logger(new_logger)
     
     logger = MetricsLoggerCallback()
     t0 = time.time()
