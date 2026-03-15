@@ -42,6 +42,7 @@ class LOBReplayEnv(gym.Env):
         inventory_penalty=0.001,
         initial_cash=10000.0,
         max_steps=None,
+        max_inventory=100,
     ):
         super().__init__()
         
@@ -51,6 +52,7 @@ class LOBReplayEnv(gym.Env):
         self.reward_type = reward_type
         self.inventory_penalty = inventory_penalty
         self.initial_cash = initial_cash
+        self.max_inventory = max_inventory
         
         assert reward_type in self.REWARD_TYPES, f"reward_type must be one of {self.REWARD_TYPES}"
         
@@ -191,22 +193,24 @@ class LOBReplayEnv(gym.Env):
         trade_side = None
         
         if action == 1:  # Market Buy (cross the spread, take from asks)
-            execution_price = best_ask * (1 + taker_fee)
-            self.cash -= execution_price
-            self.inventory += 1
-            trade_executed = True
-            trade_side = "buy"
+            if self.inventory < self.max_inventory:  # Position limit check
+                execution_price = best_ask * (1 + taker_fee)
+                self.cash -= execution_price
+                self.inventory += 1
+                trade_executed = True
+                trade_side = "buy"
             
         elif action == 2:  # Market Sell (cross the spread, take from bids)
-            execution_price = best_bid * (1 - taker_fee)
-            self.cash += execution_price
-            self.inventory -= 1
-            trade_executed = True
-            trade_side = "sell"
+            if self.inventory > -self.max_inventory:  # Position limit check
+                execution_price = best_bid * (1 - taker_fee)
+                self.cash += execution_price
+                self.inventory -= 1
+                trade_executed = True
+                trade_side = "sell"
             
         elif action == 3:  # Limit Buy at Best Bid
             fill_prob = min(0.5, float(row.get("bid_size_1", 500)) / 1000.0)
-            if self.np_random.random() < fill_prob:
+            if self.np_random.random() < fill_prob and self.inventory < self.max_inventory:
                 execution_price = best_bid * (1 + maker_fee)
                 self.cash -= execution_price
                 self.inventory += 1
@@ -215,7 +219,7 @@ class LOBReplayEnv(gym.Env):
                 
         elif action == 4:  # Limit Sell at Best Ask
             fill_prob = min(0.5, float(row.get("ask_size_1", 500)) / 1000.0)
-            if self.np_random.random() < fill_prob:
+            if self.np_random.random() < fill_prob and self.inventory > -self.max_inventory:
                 execution_price = best_ask * (1 - maker_fee)
                 self.cash += execution_price
                 self.inventory -= 1
@@ -264,11 +268,11 @@ class LOBReplayEnv(gym.Env):
         """Compute reward based on the configured reward type."""
         
         if self.reward_type == "log_return":
-            # Log-return: log(PV_t / PV_{t-1})
-            if self.prev_portfolio_value > 0:
-                log_ret = np.log(portfolio_value / self.prev_portfolio_value)
-                return float(log_ret * 10000)  # Scale to basis points for numerical stability
-            return 0.0
+            # Log-return: log(PV_t / PV_{t-1}), guarded against negative/zero PV
+            pv = max(portfolio_value, 1e-8)
+            prev_pv = max(self.prev_portfolio_value, 1e-8)
+            log_ret = np.log(pv / prev_pv)
+            return float(np.clip(log_ret * 10000, -100, 100))  # Clip to prevent extreme rewards
         
         elif self.reward_type == "sharpe":
             # Rolling Sharpe ratio
