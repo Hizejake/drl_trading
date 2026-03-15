@@ -312,8 +312,8 @@ if OPENROUTER_API_KEY:
         macro_vectors.append(emb)
         print(f"  Swarm Consensus Dir: {consensus['consensus_direction']:.2f}")
     
-    np.savez(os.path.join(DATA_DIR, "macro_vectors.npz"), embeddings=np.array(macro_vectors, dtype=np.float32))
-    MACRO_VECTORS_PATH = os.path.join(DATA_DIR, "macro_vectors.npz")
+    np.savez("macro_vectors.npz", embeddings=np.array(macro_vectors, dtype=np.float32))
+    MACRO_VECTORS_PATH = "macro_vectors.npz"
     print(f"\\n✅ Embedded and saved macro vectors to {MACRO_VECTORS_PATH}")
 else:
     print("No OPENROUTER_API_KEY set. The RL environment will default to using randomly generated macro vectors.")
