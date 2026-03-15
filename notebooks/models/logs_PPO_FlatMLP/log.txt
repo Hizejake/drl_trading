@@ -1,47 +1,47 @@
 Logging to models\logs_PPO_FlatMLP
 -----------------------------
 | time/              |      |
-|    fps             | 962  |
+|    fps             | 946  |
 |    iterations      | 1    |
 |    time_elapsed    | 2    |
 |    total_timesteps | 2048 |
 -----------------------------
------------------------------------------
-| time/                   |             |
-|    fps                  | 672         |
-|    iterations           | 2           |
-|    time_elapsed         | 6           |
-|    total_timesteps      | 4096        |
-| train/                  |             |
-|    approx_kl            | 0.013732525 |
-|    clip_fraction        | 0.0554      |
-|    clip_range           | 0.2         |
-|    entropy_loss         | -1.6        |
-|    explained_variance   | -0.00667    |
-|    learning_rate        | 0.000177    |
-|    loss                 | 0.194       |
-|    n_updates            | 10          |
-|    policy_gradient_loss | -0.00477    |
-|    value_loss           | 0.398       |
------------------------------------------
+----------------------------------------
+| time/                   |            |
+|    fps                  | 724        |
+|    iterations           | 2          |
+|    time_elapsed         | 5          |
+|    total_timesteps      | 4096       |
+| train/                  |            |
+|    approx_kl            | 0.01436352 |
+|    clip_fraction        | 0.0947     |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -1.6       |
+|    explained_variance   | -0.00204   |
+|    learning_rate        | 0.000177   |
+|    loss                 | 1.07       |
+|    n_updates            | 10         |
+|    policy_gradient_loss | -0.00844   |
+|    value_loss           | 2.33       |
+----------------------------------------
 -----------------------------------------
 | rollout/                |             |
 |    ep_len_mean          | 5e+03       |
-|    ep_rew_mean          | -179        |
+|    ep_rew_mean          | -287        |
 | time/                   |             |
-|    fps                  | 639         |
+|    fps                  | 676         |
 |    iterations           | 3           |
 |    time_elapsed         | 9           |
 |    total_timesteps      | 6144        |
 | train/                  |             |
-|    approx_kl            | 0.012220376 |
-|    clip_fraction        | 0.0244      |
+|    approx_kl            | 0.006030024 |
+|    clip_fraction        | 0.0177      |
 |    clip_range           | 0.2         |
-|    entropy_loss         | -1.58       |
-|    explained_variance   | -0.00138    |
+|    entropy_loss         | -1.59       |
+|    explained_variance   | -0.000475   |
 |    learning_rate        | 5.42e-05    |
-|    loss                 | 0.263       |
+|    loss                 | 3.05        |
 |    n_updates            | 20          |
-|    policy_gradient_loss | -0.00474    |
-|    value_loss           | 0.815       |
+|    policy_gradient_loss | -0.00278    |
+|    value_loss           | 6.4         |
 -----------------------------------------
