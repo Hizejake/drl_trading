@@ -193,16 +193,17 @@ class LOBReplayEnv(gym.Env):
         trade_side = None
         
         if action == 1:  # Market Buy (cross the spread, take from asks)
-            if self.inventory < self.max_inventory:  # Position limit check
-                execution_price = best_ask * (1 + taker_fee)
+            execution_price = best_ask * (1 + taker_fee)
+            if self.cash >= execution_price:  # Dynamic cash check
                 self.cash -= execution_price
                 self.inventory += 1
                 trade_executed = True
                 trade_side = "buy"
             
         elif action == 2:  # Market Sell (cross the spread, take from bids)
-            if self.inventory > -self.max_inventory:  # Position limit check
-                execution_price = best_bid * (1 - taker_fee)
+            # Allow shorting up to initial cash value margin
+            execution_price = best_bid * (1 - taker_fee)
+            if self.inventory > -(self.initial_cash / max(mid_price, 1e-8)):
                 self.cash += execution_price
                 self.inventory -= 1
                 trade_executed = True
@@ -210,8 +211,8 @@ class LOBReplayEnv(gym.Env):
             
         elif action == 3:  # Limit Buy at Best Bid
             fill_prob = min(0.5, float(row.get("bid_size_1", 500)) / 1000.0)
-            if self.np_random.random() < fill_prob and self.inventory < self.max_inventory:
-                execution_price = best_bid * (1 + maker_fee)
+            execution_price = best_bid * (1 + maker_fee)
+            if self.np_random.random() < fill_prob and self.cash >= execution_price:
                 self.cash -= execution_price
                 self.inventory += 1
                 trade_executed = True
@@ -219,8 +220,8 @@ class LOBReplayEnv(gym.Env):
                 
         elif action == 4:  # Limit Sell at Best Ask
             fill_prob = min(0.5, float(row.get("ask_size_1", 500)) / 1000.0)
-            if self.np_random.random() < fill_prob and self.inventory > -self.max_inventory:
-                execution_price = best_ask * (1 - maker_fee)
+            execution_price = best_ask * (1 - maker_fee)
+            if self.np_random.random() < fill_prob and self.inventory > -(self.initial_cash / max(mid_price, 1e-8)):
                 self.cash += execution_price
                 self.inventory -= 1
                 trade_executed = True

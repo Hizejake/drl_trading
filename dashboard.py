@@ -77,12 +77,7 @@ def collect_episode_data(model, env, max_ticks=None):
 def generate_html(ticks, stats, trades, output_path, model_name="PPO+CVML", dataset_name="AAPL"):
     """Generate a self-contained interactive HTML dashboard."""
     
-    # Subsample for performance if too many ticks
-    if len(ticks) > 10000:
-        step = len(ticks) // 10000
-        ticks_display = ticks[::step]
-    else:
-        ticks_display = ticks
+    ticks_display = ticks
     
     # Prepare data arrays
     steps = [t["step"] for t in ticks_display]
@@ -94,12 +89,6 @@ def generate_html(ticks, stats, trades, output_path, model_name="PPO+CVML", data
     # Trade markers
     buy_trades = [{"x": t["step"], "y": t["price"]} for t in trades if t["side"] in ("buy", "limit_buy")]
     sell_trades = [{"x": t["step"], "y": t["price"]} for t in trades if t["side"] in ("sell", "limit_sell")]
-    
-    # Subsample trades for display
-    if len(buy_trades) > 500:
-        buy_trades = buy_trades[::len(buy_trades)//500]
-    if len(sell_trades) > 500:
-        sell_trades = sell_trades[::len(sell_trades)//500]
     
     # Cumulative reward
     cum_rewards = []

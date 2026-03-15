@@ -471,25 +471,29 @@ code("""class LOBReplayEnv(gym.Env):
         trade_executed, trade_side = False, None
         
         if action == 1:  # Market Buy
-            if self.inventory < self.max_inventory:
-                self.cash -= best_ask * (1 + taker_fee)
+            execution_price = best_ask * (1 + taker_fee)
+            if self.cash >= execution_price:
+                self.cash -= execution_price
                 self.inventory += 1
                 trade_executed, trade_side = True, "buy"
         elif action == 2:  # Market Sell
-            if self.inventory > -self.max_inventory:
-                self.cash += best_bid * (1 - taker_fee)
+            execution_price = best_bid * (1 - taker_fee)
+            if self.inventory > -(self.initial_cash / max(mid_price, 1e-8)):
+                self.cash += execution_price
                 self.inventory -= 1
                 trade_executed, trade_side = True, "sell"
         elif action == 3:  # Limit Buy
             fill_prob = min(0.5, float(row.get("bid_size_1", 500)) / 1000.0)
-            if self.np_random.random() < fill_prob and self.inventory < self.max_inventory:
-                self.cash -= best_bid * (1 + maker_fee)
+            execution_price = best_bid * (1 + maker_fee)
+            if self.np_random.random() < fill_prob and self.cash >= execution_price:
+                self.cash -= execution_price
                 self.inventory += 1
                 trade_executed, trade_side = True, "limit_buy"
         elif action == 4:  # Limit Sell
             fill_prob = min(0.5, float(row.get("ask_size_1", 500)) / 1000.0)
-            if self.np_random.random() < fill_prob and self.inventory > -self.max_inventory:
-                self.cash += best_ask * (1 - maker_fee)
+            execution_price = best_ask * (1 - maker_fee)
+            if self.np_random.random() < fill_prob and self.inventory > -(self.initial_cash / max(mid_price, 1e-8)):
+                self.cash += execution_price
                 self.inventory -= 1
                 trade_executed, trade_side = True, "limit_sell"
         
@@ -801,8 +805,8 @@ def generate_dashboard(model, data_path, model_name="PPO+CVML", max_ticks=None):
     pv = [round(t["portfolio_value"], 2) for t in ticks]
     inv = [t["inventory"] for t in ticks]
     
-    buy_t = [{"x": t["step"], "y": round(t["price"], 4)} for t in trades if "buy" in t["side"]][:500]
-    sell_t = [{"x": t["step"], "y": round(t["price"], 4)} for t in trades if "sell" in t["side"]][:500]
+    buy_t = [{"x": t["step"], "y": round(t["price"], 4)} for t in trades if "buy" in t["side"]]
+    sell_t = [{"x": t["step"], "y": round(t["price"], 4)} for t in trades if "sell" in t["side"]]
     
     cum_r = []
     total = 0
