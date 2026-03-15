@@ -1,0 +1,47 @@
+Logging to models\logs_PPO_CVML
+-----------------------------
+| time/              |      |
+|    fps             | 699  |
+|    iterations      | 1    |
+|    time_elapsed    | 2    |
+|    total_timesteps | 2048 |
+-----------------------------
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 549         |
+|    iterations           | 2           |
+|    time_elapsed         | 7           |
+|    total_timesteps      | 4096        |
+| train/                  |             |
+|    approx_kl            | 0.012800199 |
+|    clip_fraction        | 0.0927      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -1.6        |
+|    explained_variance   | -0.00413    |
+|    learning_rate        | 0.000177    |
+|    loss                 | 0.241       |
+|    n_updates            | 10          |
+|    policy_gradient_loss | -0.0088     |
+|    value_loss           | 0.45        |
+-----------------------------------------
+-----------------------------------------
+| rollout/                |             |
+|    ep_len_mean          | 5e+03       |
+|    ep_rew_mean          | -313        |
+| time/                   |             |
+|    fps                  | 514         |
+|    iterations           | 3           |
+|    time_elapsed         | 11          |
+|    total_timesteps      | 6144        |
+| train/                  |             |
+|    approx_kl            | 0.012903489 |
+|    clip_fraction        | 0           |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -1.58       |
+|    explained_variance   | 0.000323    |
+|    learning_rate        | 5.42e-05    |
+|    loss                 | 3.07        |
+|    n_updates            | 20          |
+|    policy_gradient_loss | -0.00349    |
+|    value_loss           | 6.95        |
+-----------------------------------------

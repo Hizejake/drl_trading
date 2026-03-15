@@ -67,7 +67,7 @@ MODELS_DIR = "models"
 os.makedirs(MODELS_DIR, exist_ok=True)
 
 # API key for LLM Swarm
-OPENROUTER_API_KEY = ""
+OPENROUTER_API_KEY = "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"
 
 # Try to load from Kaggle Secrets securely if running on Kaggle
 try:
@@ -79,7 +79,7 @@ except Exception:
     pass
 
 # Training config
-TRAIN_TIMESTEPS = 500_000   # Full scale run
+TRAIN_TIMESTEPS = 5_000   # Full scale run
 REWARD_TYPE = "log_return"  # "log_return" | "sharpe" | "pnl"
 TICKER = "aapl"             # Which LOBSTER dataset to use
 
@@ -877,7 +877,7 @@ md("""## 🚀 Scale Up for Real Training
 To run full-scale training, update the config cell at the top:
 
 ```python
-TRAIN_TIMESTEPS = 500_000   # or 1_000_000 for thorough training
+TRAIN_TIMESTEPS = 5_000   # or 1_000_000 for thorough training
 REWARD_TYPE = "log_return"  # best for HFT
 TICKER = "aapl"             # try different tickers
 ```
@@ -914,7 +914,7 @@ nb.metadata = {
     }
 }
 
-out_path = os.path.join(os.path.dirname(__file__), "notebooks", "drl_trading_pipeline.ipynb")
+out_path = os.path.join(os.path.dirname(__file__), "notebooks", "drl_trading_test.ipynb")
 os.makedirs(os.path.dirname(out_path), exist_ok=True)
 
 with open(out_path, "w", encoding="utf-8") as f:
