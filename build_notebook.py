@@ -384,15 +384,16 @@ code("""class LOBReplayEnv(gym.Env):
     REWARD_TYPES = ("log_return", "sharpe", "pnl")
     
     def __init__(self, data_path, use_macro_vector=True, macro_vectors_path=None,
-                 reward_type="log_return", inventory_penalty=0.001, initial_cash=10000.0,
-                 max_steps=None, max_inventory=100):
+                 reward_type="log_return", inventory_penalty=0.0001, inactivity_penalty=0.05,
+                 initial_cash=10000.0, max_steps=None):
         super().__init__()
         self.data_path = data_path
         self.use_macro_vector = use_macro_vector
         self.reward_type = reward_type
         self.inventory_penalty = inventory_penalty
+        self.inactivity_penalty = inactivity_penalty
         self.initial_cash = initial_cash
-        self.max_inventory = max_inventory
+
         
         self.df = pd.read_csv(data_path)
         price_cols = sorted([c for c in self.df.columns if "price" in c])
@@ -441,6 +442,7 @@ code("""class LOBReplayEnv(gym.Env):
         self._reward_buffer = []
         self.trades = []
         self.portfolio_history = [self.initial_cash]
+        self._consecutive_holds = 0
         
         if self.macro_vectors is not None and len(self.macro_vectors) > 0:
             idx = self.np_random.integers(0, len(self.macro_vectors))
@@ -507,7 +509,18 @@ code("""class LOBReplayEnv(gym.Env):
         
         pv = self.cash + self.inventory * mid_price
         self.portfolio_history.append(pv)
-        reward = self._compute_reward(pv) - self.inventory_penalty * abs(self.inventory)
+        reward = self._compute_reward(pv)
+        
+        # Quadratic inventory penalty — small positions cheap, large expensive
+        reward -= self.inventory_penalty * (self.inventory ** 2)
+        
+        # Inactivity penalty — discourage "never trade" convergence
+        if action == 0:
+            self._consecutive_holds += 1
+            reward -= self.inactivity_penalty * min(self._consecutive_holds / 10.0, 1.0)
+        else:
+            self._consecutive_holds = 0
+        
         self.prev_portfolio_value = pv
         
         return self._get_obs(), float(reward), done, False, \\
@@ -634,7 +647,7 @@ def train_model(data_path, use_cvml=True, total_timesteps=10000, reward_type="lo
         learning_rate=linear_schedule(3e-4),
         n_steps=min(2048, env.max_step // 2),
         batch_size=64, n_epochs=10, gamma=0.99, gae_lambda=0.95,
-        ent_coef=0.01, vf_coef=0.5, max_grad_norm=0.5,
+        ent_coef=0.05, vf_coef=0.5, max_grad_norm=0.5,
         verbose=1, device=DEVICE,
     )
     

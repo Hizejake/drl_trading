@@ -26,8 +26,10 @@ class LOBReplayEnv(gym.Env):
         use_macro_vector: Whether to include 128D macro vector in obs
         macro_vectors_path: Path to .npz file with pre-computed macro vectors
         reward_type: 'log_return' | 'sharpe' | 'pnl' (default: 'log_return')
-        inventory_penalty: Penalty coefficient for inventory accumulation
-        initial_cash: Starting cash amount
+        inventory_penalty: Quadratic penalty coefficient for large positions
+        inactivity_penalty: Per-step cost for holding when the agent has capital
+        initial_cash: Starting cash — also serves as the natural position limit
+
     """
     
     REWARD_TYPES = ("log_return", "sharpe", "pnl")
@@ -39,10 +41,10 @@ class LOBReplayEnv(gym.Env):
         use_macro_vector=True,
         macro_vectors_path=None,
         reward_type="log_return",
-        inventory_penalty=0.001,
+        inventory_penalty=0.0001,
+        inactivity_penalty=0.05,
         initial_cash=10000.0,
         max_steps=None,
-        max_inventory=100,
     ):
         super().__init__()
         
@@ -51,8 +53,9 @@ class LOBReplayEnv(gym.Env):
         self.use_macro_vector = use_macro_vector
         self.reward_type = reward_type
         self.inventory_penalty = inventory_penalty
+        self.inactivity_penalty = inactivity_penalty
         self.initial_cash = initial_cash
-        self.max_inventory = max_inventory
+
         
         assert reward_type in self.REWARD_TYPES, f"reward_type must be one of {self.REWARD_TYPES}"
         
@@ -132,6 +135,7 @@ class LOBReplayEnv(gym.Env):
         self._reward_buffer = []
         self.trades = []
         self.portfolio_history = [self.initial_cash]
+        self._consecutive_holds = 0
         
         # Select macro vector for episode
         if self.macro_vectors is not None and len(self.macro_vectors) > 0:
@@ -249,9 +253,18 @@ class LOBReplayEnv(gym.Env):
         
         reward = self._compute_reward(portfolio_value)
         
-        # Inventory penalty — discourages accumulating large positions
-        inv_penalty = self.inventory_penalty * abs(self.inventory)
+        # Quadratic inventory penalty — small positions are cheap,
+        # large positions get increasingly expensive
+        inv_penalty = self.inventory_penalty * (self.inventory ** 2)
         reward -= inv_penalty
+        
+        # Inactivity penalty — discourage the agent from learning "never trade"
+        if action == 0:
+            self._consecutive_holds += 1
+            # Ramp up: the longer you hold, the higher the cost
+            reward -= self.inactivity_penalty * min(self._consecutive_holds / 10.0, 1.0)
+        else:
+            self._consecutive_holds = 0
         
         self.prev_portfolio_value = portfolio_value
         
