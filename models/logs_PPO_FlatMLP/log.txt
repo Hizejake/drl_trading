@@ -1,0 +1,29 @@
+Logging to models/logs_PPO_FlatMLP
+-----------------------------
+| time/              |      |
+|    fps             | 1832 |
+|    iterations      | 1    |
+|    time_elapsed    | 0    |
+|    total_timesteps | 1389 |
+-----------------------------
+------------------------------------------
+| rollout/                |              |
+|    ep_len_mean          | 2.78e+03     |
+|    ep_rew_mean          | -1.46e+03    |
+| time/                   |              |
+|    fps                  | 1279         |
+|    iterations           | 2            |
+|    time_elapsed         | 2            |
+|    total_timesteps      | 2778         |
+| train/                  |              |
+|    approx_kl            | 0.0049237018 |
+|    clip_fraction        | 0            |
+|    clip_range           | 0.2          |
+|    entropy_loss         | -1.61        |
+|    explained_variance   | -0.000135    |
+|    learning_rate        | 9.16e-05     |
+|    loss                 | 868          |
+|    n_updates            | 10           |
+|    policy_gradient_loss | -0.00141     |
+|    value_loss           | 2.76e+03     |
+------------------------------------------

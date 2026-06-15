@@ -1,0 +1,709 @@
+
+################################################################################
+# RUN STARTED 2026-06-07T23:59:10.662260
+################################################################################
+📝 Logging all output + errors → /kaggle/working/run_log.txt
+[?25l   [90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m0.0/187.5 kB[0m [31m?[0m eta [36m-:--:--[0m[2K   [91m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m[90m╺[0m [32m184.3/187.5 kB[0m [31m6.4 MB/s[0m eta [36m0:00:01[0m[2K   [90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m187.5/187.5 kB[0m [31m4.5 MB/s[0m eta [36m0:00:00[0m
+[?25h[?25l   [90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m0.0/93.0 kB[0m [31m?[0m eta [36m-:--:--[0m[2K   [90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m93.0/93.0 kB[0m [31m7.8 MB/s[0m eta [36m0:00:00[0m
+[?25h[?25l   [90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m0.0/12.2 MB[0m [31m?[0m eta [36m-:--:--[0m[2K   [91m━[0m[90m╺[0m[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m0.3/12.2 MB[0m [31m21.3 MB/s[0m eta [36m0:00:01[0m[2K   [91m━━━━━━━━━━━[0m[90m╺[0m[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m3.5/12.2 MB[0m [31m69.7 MB/s[0m eta [36m0:00:01[0m[2K   [91m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m[91m╸[0m[90m━━━━━━━━[0m [32m9.6/12.2 MB[0m [31m111.7 MB/s[0m eta [36m0:00:01[0m[2K   [91m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m[91m╸[0m [32m12.1/12.2 MB[0m [31m139.8 MB/s[0m eta [36m0:00:01[0m[2K   [91m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m[91m╸[0m [32m12.1/12.2 MB[0m [31m139.8 MB/s[0m eta [36m0:00:01[0m[2K   [90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m12.2/12.2 MB[0m [31m73.8 MB/s[0m eta [36m0:00:00[0m
+[?25h[31mERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+dask-cuda 26.2.0 requires cuda-core==0.3.*, but you have cuda-core 1.0.1 which is incompatible.
+dask-cuda 26.2.0 requires numba-cuda<0.23.0,>=0.22.1, but you have numba-cuda 0.30.2 which is incompatible.
+distributed-ucxx-cu12 0.48.0 requires numba-cuda[cu12]<0.23.0,>=0.22.1, but you have numba-cuda 0.30.2 which is incompatible.
+cuml-cu12 26.2.0 requires numba<0.62.0,>=0.60.0, but you have numba 0.65.1 which is incompatible.
+cuml-cu12 26.2.0 requires numba-cuda[cu12]<0.23.0,>=0.22.1, but you have numba-cuda 0.30.2 which is incompatible.
+ucxx-cu12 0.48.0 requires numba-cuda[cu12]<0.23.0,>=0.22.1, but you have numba-cuda 0.30.2 which is incompatible.
+cudf-cu12 26.2.1 requires numba<0.62.0,>=0.60.0, but you have numba 0.65.1 which is incompatible.
+cudf-cu12 26.2.1 requires numba-cuda[cu12]<0.23.0,>=0.22.2, but you have numba-cuda 0.30.2 which is incompatible.[0m[31m
+[0mGym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.
+Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.
+Users of this version of Gym should be able to simply replace 'import gym' with 'import gymnasium as gym' in the vast majority of cases.
+See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.
+PyTorch 2.10.0+cu128 | Device: cuda
+GPU: Tesla T4
+Loaded OPENROUTER_API_KEY from Kaggle Secrets
+Data dir  : /kaggle/input/datasets/niko980/lob-news/
+Ticker    : aapl  →  lobster_aapl_10_level.csv
+Timesteps : 100,000  |  Reward: log_return
+Train/test: 80% / 20%  |  Window: 10 hrs  |  Macro dim: 384
+Benchmark : ON  (5 algos × 3 seeds × 100,000 steps)
+Found in DATA_DIR: /kaggle/input/datasets/niko980/lob-news/lobster_aapl_10_level.csv
+
+Loaded: /kaggle/input/datasets/niko980/lob-news/lobster_aapl_10_level.csv
+Shape : (3474, 42)  (3,474 ticks, 42 cols)
+Cols  : ['timestamp', 'symbol', 'bid_price_1', 'ask_price_1', 'bid_size_1', 'ask_size_1'] ...
+Running LLM Swarm to generate Macro Vectors...
+Loaded real news: /kaggle/input/datasets/niko980/lob-news/polygon_aapl_news.csv  (3903 articles)
+Using 30 real news headlines.
+
+Loading SentenceTransformer...
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+BertModel LOAD REPORT from: sentence-transformers/all-MiniLM-L6-v2
+Key                     | Status     |  | 
+------------------------+------------+--+-
+embeddings.position_ids | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED	:can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+
+Event 1/30: Dan Niles has made a bold prediction about the future of Nvidia Corp. (NASDAQ:NV...
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+  Consensus dir: +0.00
+
+Event 2/30: Berkshire Hathaway trimmed its position in Apple during the first quarter, while...
+
+
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+
+
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+  Consensus dir: +0.00
+
+Event 3/30: Wealthy investors are trading one "Magnificent Seven" tech stock for another....
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+  Consensus dir: -0.52
+
+Event 4/30: Apple's latest iOS 18 beta 3 update introduces the 'InSight' feature on Apple TV...
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+
+
+
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+  Consensus dir: +0.00
+
+Event 5/30: The global wireless mouse market is expected to grow from $1.6 billion in 2023 t...
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+
+
+
+
+
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+
+
+
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+
+
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+  Consensus dir: -1.00
+
+Event 6/30: The U.S. Department of Justice is considering a full-scale breakup of Alphabet (...
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+
+
+
+
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+  Consensus dir: +0.00
+
+Event 7/30: Rogers will offer the latest iPhone, Apple Watch, and AirPods models, featuring ...
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+
+
+
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+
+
+
+
+
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+  Consensus dir: +0.00
+
+Event 8/30: The article discusses the potential for Shiba Inu, a speculative cryptocurrency,...
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+  Consensus dir: -1.00
+
+Event 9/30: Apple is facing a £3 billion ($3.81 billion) legal claim in the UK for allegedly...
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+
+
+
+
+
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+
+
+
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+  Consensus dir: -1.00
+
+Event 10/30: JPMorgan analyst Samik Chatterjee outlines a dual thesis for Apple's 2025 prospe...
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+
+
+
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+  Consensus dir: +0.54
+
+Event 11/30: Wall Street is defending Nvidia after its biggest loss ever, as many momentum tr...
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+
+
+
+
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+  Consensus dir: +1.00
+
+Event 12/30: Warren Buffett has sold large portions of his Apple and Bank of America holdings...
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+
+
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+================================================================================
+EXCEPTION @ 2026-06-08T00:03:38.531340
+================================================================================
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/dist-packages/IPython/core/interactiveshell.py", line 3551, in run_code
+    await eval(code_obj, self.user_global_ns, self.user_ns)
+  File "/tmp/ipykernel_58/3676446673.py", line 115, in <cell line: 1>
+    swarm_res = await run_swarm(event)
+                ^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/ipykernel_58/3676446673.py", line 55, in run_swarm
+    return await asyncio.gather(*tasks)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/ipykernel_58/3676446673.py", line 43, in _call_agent
+    resp = await acompletion(model=model, messages=[
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/litellm/utils.py", line 1892, in wrapper_async
+    result = await original_function(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/litellm/main.py", line 620, in acompletion
+    response = await init_response
+               ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/litellm/llms/custom_httpx/llm_http_handler.py", line 307, in async_completion
+    response = await self._make_common_async_call(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/litellm/llms/custom_httpx/llm_http_handler.py", line 175, in _make_common_async_call
+    response = await async_httpx_client.post(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/litellm/litellm_core_utils/logging_utils.py", line 297, in async_wrapper
+    result = await func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/litellm/llms/custom_httpx/http_handler.py", line 468, in post
+    response = await self.client.send(req, stream=stream)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/httpx/_client.py", line 1629, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/httpx/_client.py", line 1657, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/httpx/_client.py", line 1694, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/httpx/_client.py", line 1730, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/litellm/llms/custom_httpx/aiohttp_transport.py", line 307, in handle_async_request
+    response = await self._make_aiohttp_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/litellm/llms/custom_httpx/aiohttp_transport.py", line 285, in _make_aiohttp_request
+    response = await client_session.request(**request_kwargs).__aenter__()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/aiohttp/client.py", line 1521, in __aenter__
+    self._resp: _RetType = await self._coro
+                           ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/aiohttp/client.py", line 788, in _request
+    resp = await handler(req)
+           ^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/aiohttp/client.py", line 766, in _connect_and_send_request
+    await resp.start(conn)
+  File "/usr/local/lib/python3.12/dist-packages/aiohttp/client_reqrep.py", line 539, in start
+    message, payload = await protocol.read()  # type: ignore[union-attr]
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/aiohttp/streams.py", line 707, in read
+    await self._waiter
+asyncio.exceptions.CancelledError
