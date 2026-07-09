@@ -790,6 +790,7 @@ Generates an HTML dashboard with PnL curve, trade markers, inventory, and metric
 
 code("""from IPython.display import HTML, display
 import json as _json
+import math
 
 def generate_dashboard(model, data_path, model_name="PPO+CVML", max_ticks=None):
     env = LOBReplayEnv(data_path, reward_type=REWARD_TYPE)
@@ -807,26 +808,47 @@ def generate_dashboard(model, data_path, model_name="PPO+CVML", max_ticks=None):
     
     stats = env.get_episode_stats()
     trades = env.trades
-    
-    # Subsample for display
-    if len(ticks) > 5000:
-        s = len(ticks) // 5000
-        ticks = ticks[::s]
-    
-    steps = [t["step"] for t in ticks]
-    mid_p = [round(t["mid_price"], 4) for t in ticks]
-    pv = [round(t["portfolio_value"], 2) for t in ticks]
-    inv = [t["inventory"] for t in ticks]
-    
-    buy_t = [{"x": t["step"], "y": round(t["price"], 4)} for t in trades if "buy" in t["side"]]
-    sell_t = [{"x": t["step"], "y": round(t["price"], 4)} for t in trades if "sell" in t["side"]]
-    
-    cum_r = []
-    total = 0
+    n_ticks = len(ticks)
+
+    # ── Bound everything embedded in the HTML so the dashboard renders even for
+    #    long episodes / very active policies. A 500k-step model trades on nearly
+    #    every tick, so the raw series + trade arrays can reach 1e5-1e6 points —
+    #    enough to blow up the embedded JSON and leave the dashboard blank.
+    MAX_POINTS, MAX_MARKERS = 4000, 800
+
+    def _fin(x, nd=4):
+        x = float(x)
+        return round(x, nd) if math.isfinite(x) else None
+
+    # Cumulative reward over the FULL stream (correct), computed BEFORE subsampling
+    cum_full, _run = [], 0.0
     for t in ticks:
-        total += t["reward"]
-        cum_r.append(round(total, 4))
-    
+        _run += t["reward"]
+        cum_full.append(_run)
+
+    # Uniform tick subsample (keeps first & last), applied to every line series
+    if n_ticks > MAX_POINTS:
+        idx = np.unique(np.linspace(0, n_ticks - 1, MAX_POINTS).astype(int))
+    else:
+        idx = np.arange(n_ticks)
+
+    steps = [int(ticks[i]["step"]) for i in idx]
+    mid_p = [_fin(ticks[i]["mid_price"]) for i in idx]
+    pv    = [_fin(ticks[i]["portfolio_value"], 2) for i in idx]
+    inv   = [int(ticks[i]["inventory"]) for i in idx]
+    cum_r = [_fin(cum_full[i]) for i in idx]
+
+    # Trade markers subsampled per side (capped) so the scatter stays lightweight
+    def _markers(side_key):
+        pts = [{"x": int(t["step"]), "y": _fin(t["price"])}
+               for t in trades if side_key in t["side"]]
+        if len(pts) > MAX_MARKERS:
+            keep = np.unique(np.linspace(0, len(pts) - 1, MAX_MARKERS).astype(int))
+            pts = [pts[k] for k in keep]
+        return pts
+
+    buy_t, sell_t = _markers("buy"), _markers("sell")
+
     ret_class = "positive" if stats["total_return_pct"] >= 0 else "negative"
     sharpe_class = "positive" if stats["sharpe_ratio"] >= 0 else "negative"
 
@@ -845,7 +867,7 @@ def generate_dashboard(model, data_path, model_name="PPO+CVML", max_ticks=None):
     </style>
     <div class="dash">
         <h2>DRL Trading Bot — Backtest Dashboard</h2>
-        <p style="color:#888; font-size:13px;">{model_name} | {len(ticks):,} ticks</p>
+        <p style="color:#888; font-size:13px;">{model_name} | {n_ticks:,} ticks</p>
         <div class="metrics">
             <div class="metric"><div class="label">Return</div><div class="val {ret_class}">{stats["total_return_pct"]:+.4f}%</div></div>
             <div class="metric"><div class="label">Final PV</div><div class="val neutral">${stats["final_pv"]:,.2f}</div></div>
