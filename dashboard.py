@@ -439,15 +439,17 @@ if __name__ == "__main__":
     macro_path = MACRO_VECTORS_PATH if os.path.exists(MACRO_VECTORS_PATH) else None
     
     print(f"Loading model: {model_path}")
+    # Backtest on the held-out test window (matches train.py's split)
     env = LOBReplayEnv(
         data_path=data_path,
         use_macro_vector=True,
         macro_vectors_path=macro_path,
         reward_type="log_return",
+        start_frac=0.7, end_frac=1.0,
     )
     model = PPO.load(model_path, env=env)
-    
-    print(f"Running evaluation on {args.data.upper()}...")
+
+    print(f"Running out-of-sample evaluation on {args.data.upper()}...")
     ticks, stats, trades = collect_episode_data(model, env, max_ticks=args.max_ticks)
     
     print(f"\nEpisode Stats:")

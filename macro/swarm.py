@@ -25,16 +25,12 @@ OPENROUTER_APP_NAME = "DRL-HFT-Swarm"
 # All models are confirmed free-tier on OpenRouter as of March 2026.
 # LiteLLM's OpenRouter prefix: "openrouter/<provider>/<model>" (no double slash)
 PERSONA_MODELS = {
-    # Confirmed working in live test - NVIDIA infra, not Venice
+    # Live slugs as of 2026-07 — check GET /api/v1/models (:free) when these drift
     "momentum":       "openrouter/nvidia/nemotron-3-super-120b-a12b:free",
-    # NVIDIA nano suite - different architecture from the 120B, genuine diversity
     "mean_reversion": "openrouter/nvidia/nemotron-3-nano-30b-a3b:free",
-    # NVIDIA's newest generation vision-capable model
-    "macro_risk":     "openrouter/nvidia/nemotron-nano-9b-v2:free",
-    # Mistral 24B - backed by Mistral AI directly, not Venice
-    "liquidity":      "openrouter/mistralai/mistral-small-3.1-24b-instruct:free",
-    # Arcee Trinity Large - different training lineage for swarm diversity
-    "volatility":     "openrouter/arcee-ai/trinity-large-preview:free",
+    "macro_risk":     "openrouter/openai/gpt-oss-120b:free",
+    "liquidity":      "openrouter/meta-llama/llama-3.3-70b-instruct:free",
+    "volatility":     "openrouter/qwen/qwen3-next-80b-a3b-instruct:free",
 }
 
 # LiteLLM reads OPENROUTER_API_KEY automatically when model prefix is 'openrouter/'
@@ -99,11 +95,18 @@ EXTRA_HEADERS = {
 
 
 def _extract_json(text: str) -> dict:
-    """Strip markdown code fences and extract JSON from LLM response."""
-    # Remove ```json ... ``` or ``` ... ``` wrappers
+    """Extract the first JSON object from an LLM response (handles code
+    fences, reasoning preambles, and trailing prose)."""
     import re
     text = re.sub(r"```(?:json)?\s*", "", text).strip().rstrip("`").strip()
-    return json.loads(text)
+    try:
+        return json.loads(text)
+    except json.JSONDecodeError:
+        # Fall back to the first balanced {...} block in the text
+        match = re.search(r"\{[^{}]*\}", text, re.DOTALL)
+        if match:
+            return json.loads(match.group(0))
+        raise
 
 
 async def _call_agent(persona_name: str, system_prompt: str, event_text: str, model: str):
@@ -122,9 +125,12 @@ async def _call_agent(persona_name: str, system_prompt: str, event_text: str, mo
                 response_format={"type": "json_object"},
                 extra_headers=EXTRA_HEADERS,
                 temperature=0.3,
-                max_tokens=256,
+                max_tokens=2048,  # reasoning-style models need headroom before the JSON
             )
             content = response.choices[0].message.content
+            if not content:
+                return {"persona": persona_name, "model": model, "parsed": None,
+                        "error": "empty response content"}
             parsed = _extract_json(content)
             return {"persona": persona_name, "model": model, "parsed": parsed, "error": None}
 

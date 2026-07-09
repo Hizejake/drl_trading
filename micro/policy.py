@@ -10,13 +10,13 @@ class HierarchicalFeatureExtractor(BaseFeaturesExtractor):
     Custom Feature Extractor for Stable Baselines 3 PPO.
     Takes a Dict observation space with:
     - lob: (40,) flat features
-    - macro: (128,) semantic features
+    - macro: (macro_dim,) consensus scalars + pooled semantic embedding
     Passes LOB through CVML, then concatenates with Macro.
     """
     def __init__(self, observation_space: spaces.Dict, cvml_out_dim: int = 64, cnn_activation=nn.ReLU):
-        # We know the output dimension is cvml_out_dim + 128 (macro)
-        super(HierarchicalFeatureExtractor, self).__init__(observation_space, features_dim=cvml_out_dim + 128)
-        
+        macro_dim = observation_space["macro"].shape[0]
+        super(HierarchicalFeatureExtractor, self).__init__(observation_space, features_dim=cvml_out_dim + macro_dim)
+
         self.cvml = CVML(in_channels=4, levels=10, out_dim=cvml_out_dim)
         
         # Optional: Projection layer to avoid macro vector dominating the CVML features
@@ -35,7 +35,7 @@ class HierarchicalFeatureExtractor(BaseFeaturesExtractor):
         cvml_features = self.cvml(lob_data)
         
         # 2. Concatenate the temporal microstructure features with the semantic macro features
-        # Shape: (Batch, 64 + 128) -> (Batch, 192)
+        # Shape: (Batch, cvml_out_dim + macro_dim)
         combined_features = torch.cat([cvml_features, macro_data], dim=1)
         
         return combined_features
@@ -43,8 +43,9 @@ class HierarchicalFeatureExtractor(BaseFeaturesExtractor):
 # For pure LOB testing (ablation study)
 class FlatMLPFeatureExtractor(BaseFeaturesExtractor):
     """Ablation baseline feature extractor using flat MLPs instead of CVML."""
-    def __init__(self, observation_space: spaces.Dict, features_dim: int = 192):
-        super(FlatMLPFeatureExtractor, self).__init__(observation_space, features_dim=features_dim)
+    def __init__(self, observation_space: spaces.Dict, mlp_out_dim: int = 64):
+        macro_dim = observation_space["macro"].shape[0]
+        super(FlatMLPFeatureExtractor, self).__init__(observation_space, features_dim=mlp_out_dim + macro_dim)
         self.mlp = nn.Sequential(
             nn.Linear(40, 64),
             nn.ReLU(),

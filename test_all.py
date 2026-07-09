@@ -63,15 +63,21 @@ def test_cvml():
 
 # ── Test 3: LOBReplayEnv ─────────────────────────────────────────────────────
 def test_env():
-    from micro.env import LOBReplayEnv
+    from micro.env import LOBReplayEnv, MACRO_DIM, canonical_lob_columns
     env = LOBReplayEnv(data_path=DATA_PATH)
     obs, info = env.reset()
     assert "lob" in obs, "Missing 'lob' key in obs"
     assert "macro" in obs, "Missing 'macro' key in obs"
     assert obs["lob"].shape == (40,), f"LOB shape: {obs['lob'].shape}"
-    assert obs["macro"].shape == (128,), f"Macro shape: {obs['macro'].shape}"
+    assert obs["macro"].shape == (MACRO_DIM,), f"Macro shape: {obs['macro'].shape}"
+    # Canonical ordering: numeric level order, blocks match CVML's (4,10) reshape
+    cols = canonical_lob_columns()
+    assert env.feature_cols == cols
+    assert cols[:3] == ["bid_price_1", "bid_price_2", "bid_price_3"], "level order must be numeric"
+    assert cols[10] == "ask_price_1" and cols[20] == "bid_size_1" and cols[30] == "ask_size_1"
     print(f"  Obs keys: {list(obs.keys())}")
     print(f"  LOB shape: {obs['lob'].shape}, Macro shape: {obs['macro'].shape}")
+    print(f"  Canonical column order: OK")
 
     # Test all 5 actions
     actions = {0: 'Hold', 1: 'Market Buy', 2: 'Market Sell', 3: 'Limit Buy', 4: 'Limit Sell'}
@@ -95,25 +101,27 @@ def test_policy():
     import numpy as np
     from micro.policy import HierarchicalFeatureExtractor, FlatMLPFeatureExtractor
 
+    from micro.env import MACRO_DIM
+
     obs_space = spaces.Dict({
         "lob": spaces.Box(low=0, high=np.inf, shape=(40,), dtype=np.float32),
-        "macro": spaces.Box(low=-1.0, high=1.0, shape=(128,), dtype=np.float32)
+        "macro": spaces.Box(low=-1.0, high=1.0, shape=(MACRO_DIM,), dtype=np.float32)
     })
 
     # Test HierarchicalFeatureExtractor (CVML)
     hfe = HierarchicalFeatureExtractor(obs_space)
     test_obs = {
         "lob": torch.randn(8, 40),
-        "macro": torch.randn(8, 128)
+        "macro": torch.randn(8, MACRO_DIM)
     }
     out = hfe(test_obs)
-    assert out.shape == (8, 192), f"Expected (8,192), got {out.shape}"
-    print(f"  HierarchicalFeatureExtractor: {out.shape} (64 CVML + 128 macro)")
+    assert out.shape == (8, 64 + MACRO_DIM), f"Expected (8,{64+MACRO_DIM}), got {out.shape}"
+    print(f"  HierarchicalFeatureExtractor: {out.shape} (64 CVML + {MACRO_DIM} macro)")
 
     # Test FlatMLPFeatureExtractor (ablation baseline)
     flat = FlatMLPFeatureExtractor(obs_space)
     out_flat = flat(test_obs)
-    assert out_flat.shape == (8, 192), f"Expected (8,192), got {out_flat.shape}"
+    assert out_flat.shape == (8, 64 + MACRO_DIM), f"Expected (8,{64+MACRO_DIM}), got {out_flat.shape}"
     print(f"  FlatMLPFeatureExtractor: {out_flat.shape}")
 
 # ── Test 5: Swarm module imports / consensus logic ────────────────────────────
@@ -216,6 +224,69 @@ def test_load_saved_model():
     print(f"  Eval: {steps} steps, total_reward={total_reward:.4f}, final_pv=${info['portfolio_value']:.2f}")
 
 
+# ── Test 9: Train/test windowing + random starts ─────────────────────────────
+def test_windowing():
+    from micro.env import LOBReplayEnv
+    train_env = LOBReplayEnv(data_path=DATA_PATH, start_frac=0.0, end_frac=0.7,
+                             random_start=True, max_steps=50)
+    eval_env = LOBReplayEnv(data_path=DATA_PATH, start_frac=0.7, end_frac=1.0)
+
+    starts = set()
+    for _ in range(10):
+        train_env.reset(seed=None)
+        starts.add(train_env.current_step)
+        assert train_env._window_lo <= train_env.current_step <= train_env._window_hi
+    assert len(starts) > 1, "random_start should vary episode start rows"
+
+    # Train window never touches eval rows; episodes respect max_steps
+    obs, _ = train_env.reset()
+    done, steps = False, 0
+    while not done:
+        obs, r, done, trunc, info = train_env.step(0)
+        steps += 1
+    assert steps <= 50, f"episode exceeded max_steps: {steps}"
+    assert train_env.current_step <= train_env._window_hi <= eval_env._window_lo
+    print(f"  {len(starts)} distinct random starts; episode len {steps} <= 50")
+    print(f"  train window [{train_env._window_lo},{train_env._window_hi}] "
+          f"| eval window [{eval_env._window_lo},{eval_env._window_hi}]")
+
+# ── Test 10: Time-aligned macro vectors ──────────────────────────────────────
+def test_macro_alignment():
+    import numpy as np
+    import pandas as pd
+    import tempfile
+    from micro.env import LOBReplayEnv, MACRO_DIM
+
+    df = pd.read_csv(DATA_PATH)
+    # Use known numeric timestamps regardless of what the source file has
+    df["timestamp"] = 1_000_000 + np.arange(len(df)) * 60.0
+    with tempfile.TemporaryDirectory() as tmp:
+        data_path = os.path.join(tmp, "lob.csv")
+        df.to_csv(data_path, index=False)
+
+        ts = df["timestamp"].values
+        # Two events: one before row 100, one before row 300
+        rng = np.random.RandomState(0)
+        npz_path = os.path.join(tmp, "macro.npz")
+        np.savez(npz_path,
+                 timestamps=np.array([ts[100] - 1, ts[300] - 1], dtype=np.float64),
+                 scalars=np.array([[0.5, 0.3, 0.8, 0.9], [-0.7, 0.6, 0.7, 0.5]], dtype=np.float32),
+                 embeddings=rng.randn(2, 384).astype(np.float32))
+
+        env = LOBReplayEnv(data_path=data_path, macro_vectors_path=npz_path)
+        assert env._macro_by_row is not None, "aligned macro vectors not loaded"
+        assert env._macro_by_row.shape == (len(df), MACRO_DIM)
+        # Before first event: zeros. After: scalars prefix must match the event.
+        assert np.all(env._macro_by_row[50] == 0), "rows before first event must be zeros"
+        assert abs(env._macro_by_row[150][0] - 0.5) < 1e-6, "row 150 should see event 1"
+        assert abs(env._macro_by_row[350][0] - -0.7) < 1e-6, "row 350 should see event 2"
+        # zero_macro ablation keeps shape but zeroes content
+        env_z = LOBReplayEnv(data_path=data_path, macro_vectors_path=npz_path, zero_macro=True)
+        obs, _ = env_z.reset()
+        assert np.all(obs["macro"] == 0)
+    print(f"  Alignment: zeros before first event, correct event per row, "
+          f"zero_macro ablation OK")
+
 # ── Run all tests ─────────────────────────────────────────────────────────────
 if __name__ == "__main__":
     run_test("1. Data Files", test_data_files)
@@ -226,6 +297,8 @@ if __name__ == "__main__":
     run_test("6. Semantic Encoder", test_semantic_encoder)
     run_test("7. PPO+CVML Integration", test_ppo_integration)
     run_test("8. Load Saved Model", test_load_saved_model)
+    run_test("9. Train/Test Windowing", test_windowing)
+    run_test("10. Time-Aligned Macro", test_macro_alignment)
 
     print(f"\n{'='*60}")
     print("SUMMARY")
