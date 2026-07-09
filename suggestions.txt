@@ -1,0 +1,156 @@
+Suggested Trading Environment Logic
+===================================
+
+Context
+-------
+The DRL trading pipeline notebook currently lets the agent use Sell actions even
+when inventory is zero. This means the agent can open short positions. That is
+not automatically wrong, but the notebook does not model the real constraints
+that make short selling realistic, such as borrow availability, borrow fees,
+margin rules, liquidation rules, or locate requirements.
+
+Given that context, the cleaner modeling choice is to make the environment
+long-only unless a full short-selling model is added later.
+
+
+1. Make the action semantics long-only
+--------------------------------------
+Suggested action meaning:
+
+0 = Hold
+1 = Market Buy
+2 = Market Sell
+3 = Limit Buy
+4 = Limit Sell
+
+In the suggested logic, Sell should only reduce an existing long position. It
+should not open a short position.
+
+Suggested rules:
+
+- Market Buy is valid only if there is enough cash and inventory is below a
+  configured maximum inventory limit.
+- Market Sell is valid only if inventory is greater than zero.
+- Limit Buy is valid only if there is enough cash and inventory is below the
+  maximum inventory limit.
+- Limit Sell is valid only if inventory is greater than zero.
+
+Reasoning:
+
+The current notebook is a simplified order book replay environment. It models
+cash, inventory, taker fees, maker rebates, and probabilistic limit fills, but
+it does not model the additional mechanics required for realistic short
+selling. Allowing negative inventory therefore makes the results harder to
+interpret. A long-only setup keeps the experiment aligned with the assumptions
+that are actually implemented.
+
+
+2. Add an explicit maximum inventory limit
+------------------------------------------
+Suggested parameters:
+
+max_inventory = 50
+invalid_action_penalty = 0.01
+
+Buy actions should check:
+
+inventory < max_inventory
+
+Reasoning:
+
+The environment already penalizes large inventory through a quadratic inventory
+penalty, but a hard maximum position size makes the trading rules explicit. It
+also prevents the policy from learning extreme accumulation behavior that is
+only limited indirectly by available cash.
+
+
+3. Treat invalid actions as no-op plus a small penalty
+------------------------------------------------------
+Suggested behavior:
+
+- If the agent tries to sell with zero inventory, no trade executes.
+- If the agent tries to buy while at max inventory, no trade executes.
+- If the agent tries to buy without enough cash, no trade executes.
+- Apply a small invalid-action penalty so the policy learns that invalid
+  actions are undesirable.
+
+Example market sell logic:
+
+elif action == 2:
+    if self.inventory > 0:
+        execution_price = best_bid * (1 - taker_fee)
+        self.cash += execution_price
+        self.inventory -= 1
+        trade_executed = True
+        trade_side = "sell"
+    else:
+        invalid_action = True
+
+Example limit sell logic:
+
+elif action == 4:
+    fill_prob = min(0.5, float(row.get("ask_size_1", 500)) / 1000.0)
+    execution_price = best_ask * (1 - maker_fee)
+
+    if self.inventory > 0 and self.np_random.random() < fill_prob:
+        self.cash += execution_price
+        self.inventory -= 1
+        trade_executed = True
+        trade_side = "limit_sell"
+    elif self.inventory <= 0:
+        invalid_action = True
+
+Then after reward calculation:
+
+if invalid_action:
+    reward -= invalid_action_penalty
+
+Reasoning:
+
+Silently ignoring invalid actions can make training inefficient because the
+agent receives weak feedback about impossible behavior. A small penalty gives
+the policy a clear learning signal without dominating the actual trading reward.
+
+
+4. Add terminal liquidation for cleaner evaluation
+--------------------------------------------------
+The notebook currently reports final portfolio value as:
+
+portfolio_value = cash + inventory * mid_price
+
+This is mark-to-market accounting and is acceptable as a diagnostic, but it
+means two strategies can finish with different open exposures. For cleaner
+model comparison, especially against TWAP and VWAP baselines that flatten near
+the end, evaluation should either force liquidation or report exposure very
+explicitly.
+
+Suggested evaluation behavior:
+
+- At terminal evaluation, liquidate remaining long inventory at the best bid
+  minus taker fee.
+- Keep reporting final inventory as a diagnostic.
+
+For a long-only setup:
+
+terminal_value = cash + inventory * best_bid * (1 - taker_fee)
+
+Reasoning:
+
+Terminal liquidation compares realized exit value rather than leaving open
+positions marked at mid price. This makes the evaluation table easier to read
+and avoids rewarding a strategy simply for carrying unresolved exposure at the
+end of the test window.
+
+
+Recommended Final Design
+------------------------
+The suggested design for the current notebook is:
+
+- Long-only trading.
+- Bounded inventory.
+- Invalid actions become no-op plus a small penalty.
+- Evaluation includes terminal liquidation.
+- Final inventory remains visible in the metrics table.
+
+This keeps the experiment simple, internally consistent, and easier to compare
+across PPO variants and baseline strategies.
