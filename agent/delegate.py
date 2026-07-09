@@ -8,7 +8,10 @@ Usage:
 import argparse
 import sys
 
-from workers import call_huggingface, call_nvidia, call_openrouter
+try:
+    from .workers import call_huggingface, call_nvidia, call_openrouter
+except ImportError:
+    from workers import call_huggingface, call_nvidia, call_openrouter
 
 PROVIDERS = {
     "hf": call_huggingface,

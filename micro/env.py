@@ -69,6 +69,8 @@ class LOBReplayEnv(gym.Env):
         inventory_penalty=0.0001,
         inactivity_penalty=0.0,
         initial_cash=10000.0,
+        max_inventory=50,
+        invalid_action_penalty=0.01,
         max_steps=None,
         start_frac=0.0,
         end_frac=1.0,
@@ -84,6 +86,8 @@ class LOBReplayEnv(gym.Env):
         self.inventory_penalty = inventory_penalty
         self.inactivity_penalty = inactivity_penalty
         self.initial_cash = initial_cash
+        self.max_inventory = max_inventory
+        self.invalid_action_penalty = invalid_action_penalty
         self.random_start = random_start
 
         assert reward_type in self.REWARD_TYPES, f"reward_type must be one of {self.REWARD_TYPES}"
@@ -261,6 +265,10 @@ class LOBReplayEnv(gym.Env):
         mid = self._get_mid_price()
         return self.cash + (self.inventory * mid)
 
+    def _get_terminal_portfolio_value(self, best_bid, taker_fee):
+        """Mark remaining long inventory to the bid on the terminal step."""
+        return self.cash + max(self.inventory, 0) * best_bid * (1 - taker_fee)
+
     def step(self, action):
         row = self.df.iloc[self.current_step]
         best_bid = float(row["bid_price_1"])
@@ -274,41 +282,51 @@ class LOBReplayEnv(gym.Env):
         trade_executed = False
         execution_price = 0.0
         trade_side = None
+        invalid_action = False
 
         if action == 1:  # Market Buy (cross the spread, take from asks)
             execution_price = best_ask * (1 + taker_fee)
-            if self.cash >= execution_price:  # Dynamic cash check
+            if self.cash >= execution_price and self.inventory < self.max_inventory:
                 self.cash -= execution_price
                 self.inventory += 1
                 trade_executed = True
                 trade_side = "buy"
+            else:
+                invalid_action = True
 
         elif action == 2:  # Market Sell (cross the spread, take from bids)
-            # Allow shorting up to initial cash value margin
             execution_price = best_bid * (1 - taker_fee)
-            if self.inventory > -(self.initial_cash / max(mid_price, 1e-8)):
+            if self.inventory > 0:
                 self.cash += execution_price
                 self.inventory -= 1
                 trade_executed = True
                 trade_side = "sell"
+            else:
+                invalid_action = True
 
         elif action == 3:  # Limit Buy at Best Bid
             fill_prob = min(0.5, float(row.get("bid_size_1", 500)) / 1000.0)
             execution_price = best_bid * (1 + maker_fee)
-            if self.np_random.random() < fill_prob and self.cash >= execution_price:
-                self.cash -= execution_price
-                self.inventory += 1
-                trade_executed = True
-                trade_side = "limit_buy"
+            if self.cash >= execution_price and self.inventory < self.max_inventory:
+                if self.np_random.random() < fill_prob:
+                    self.cash -= execution_price
+                    self.inventory += 1
+                    trade_executed = True
+                    trade_side = "limit_buy"
+            else:
+                invalid_action = True
 
         elif action == 4:  # Limit Sell at Best Ask
             fill_prob = min(0.5, float(row.get("ask_size_1", 500)) / 1000.0)
             execution_price = best_ask * (1 - maker_fee)
-            if self.np_random.random() < fill_prob and self.inventory > -(self.initial_cash / max(mid_price, 1e-8)):
-                self.cash += execution_price
-                self.inventory -= 1
-                trade_executed = True
-                trade_side = "limit_sell"
+            if self.inventory > 0:
+                if self.np_random.random() < fill_prob:
+                    self.cash += execution_price
+                    self.inventory -= 1
+                    trade_executed = True
+                    trade_side = "limit_sell"
+            else:
+                invalid_action = True
 
         # Record trade
         if trade_executed:
@@ -330,7 +348,7 @@ class LOBReplayEnv(gym.Env):
         truncated = False
 
         # ── Compute Reward ────────────────────────────────────────────────
-        portfolio_value = self._get_portfolio_value()
+        portfolio_value = self._get_terminal_portfolio_value(best_bid, taker_fee) if done else self._get_portfolio_value()
         self.portfolio_history.append(portfolio_value)
 
         reward = self._compute_reward(portfolio_value)
@@ -349,6 +367,9 @@ class LOBReplayEnv(gym.Env):
         else:
             self._consecutive_holds = 0
 
+        if invalid_action:
+            reward -= self.invalid_action_penalty
+
         self.prev_portfolio_value = portfolio_value
 
         info = {
@@ -358,6 +379,8 @@ class LOBReplayEnv(gym.Env):
             "trade_executed": trade_executed,
             "step": self.current_step,
         }
+        if done:
+            info["terminal_portfolio_value"] = portfolio_value
 
         return self._get_obs(), float(reward), done, truncated, info
 

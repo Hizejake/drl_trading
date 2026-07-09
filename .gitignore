@@ -38,3 +38,7 @@ Thumbs.db
 desktop.ini
 
 CLAUDE.md
+
+# Archived/raw datasets (very large)
+data/raw/archive/*.csv
+notebooks/data/raw/archive/*.csv

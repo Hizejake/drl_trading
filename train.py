@@ -84,6 +84,8 @@ def make_env(data_path, macro_path, reward_type, train=True, zero_macro=False,
             zero_macro=zero_macro,
             reward_type=reward_type,
             inventory_penalty=0.001,
+            max_inventory=50,
+            invalid_action_penalty=0.01,
             start_frac=0.0, end_frac=TRAIN_FRAC,
             random_start=True,
             max_steps=TRAIN_EPISODE_STEPS,
@@ -95,6 +97,8 @@ def make_env(data_path, macro_path, reward_type, train=True, zero_macro=False,
         zero_macro=zero_macro,
         reward_type=reward_type,
         inventory_penalty=0.001,
+        max_inventory=50,
+        invalid_action_penalty=0.01,
         start_frac=TRAIN_FRAC, end_frac=1.0,
         random_start=False,
         max_steps=max_steps,
@@ -260,7 +264,7 @@ def run_buy_hold_baseline(env):
 
     while not done:
         row = env.df.iloc[env.current_step]
-        can_buy = env.cash >= float(row["ask_price_1"]) * 1.001
+        can_buy = env.cash >= float(row["ask_price_1"]) * 1.001 and env.inventory < env.max_inventory
         action = 1 if can_buy else 0
         obs, reward, done, truncated, info = env.step(action)
         if truncated:
@@ -280,7 +284,7 @@ def run_twap_baseline(env):
     horizon = env._window_hi - env.current_step
 
     while not done:
-        if steps % buy_interval == 0 and steps < horizon - 100:
+        if steps % buy_interval == 0 and steps < horizon - 100 and env.inventory < env.max_inventory:
             action = 1  # Market Buy
         elif steps >= horizon - 50 and env.inventory > 0:
             action = 2  # Market Sell to flatten
@@ -315,7 +319,7 @@ def run_vwap_baseline(env):
         # VWAP logic: buy when volume is high relative to average
         avg_vol = total_volume_seen / max(steps + 1, 1)
 
-        if total_vol > avg_vol * 1.2 and steps < horizon - 100:
+        if total_vol > avg_vol * 1.2 and steps < horizon - 100 and env.inventory < env.max_inventory:
             action = 1  # Market Buy on high volume
         elif steps >= horizon - 50 and env.inventory > 0:
             action = 2  # Flatten

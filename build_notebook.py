@@ -182,11 +182,13 @@ def make_env(train=True, zero_macro=False, max_steps=None):
         return LOBReplayEnv(
             data_path=DATA_PATH, use_macro_vector=True, macro_vectors_path=MACRO_PATH,
             zero_macro=zero_macro, reward_type=REWARD_TYPE, inventory_penalty=0.001,
+            max_inventory=50, invalid_action_penalty=0.01,
             start_frac=0.0, end_frac=TRAIN_FRAC, random_start=True,
             max_steps=TRAIN_EPISODE_STEPS)
     return LOBReplayEnv(
         data_path=DATA_PATH, use_macro_vector=True, macro_vectors_path=MACRO_PATH,
         zero_macro=zero_macro, reward_type=REWARD_TYPE, inventory_penalty=0.001,
+        max_inventory=50, invalid_action_penalty=0.01,
         start_frac=TRAIN_FRAC, end_frac=1.0, random_start=False, max_steps=max_steps)
 
 
@@ -281,7 +283,7 @@ def run_buy_hold(env):
     done = False
     while not done:
         row = env.df.iloc[env.current_step]
-        action = 1 if env.cash >= float(row["ask_price_1"]) * 1.001 else 0
+        action = 1 if env.cash >= float(row["ask_price_1"]) * 1.001 and env.inventory < env.max_inventory else 0
         obs, r, done, trunc, info = env.step(action)
         if trunc:
             break
@@ -294,7 +296,7 @@ def run_twap(env):
     done, steps = False, 0
     horizon = env._window_hi - env.current_step
     while not done:
-        if steps % 50 == 0 and steps < horizon - 100:
+        if steps % 50 == 0 and steps < horizon - 100 and env.inventory < env.max_inventory:
             action = 1
         elif steps >= horizon - 50 and env.inventory > 0:
             action = 2
@@ -319,7 +321,7 @@ def run_vwap(env):
         total_vol = bid_vol + ask_vol
         total_volume_seen += total_vol
         avg_vol = total_volume_seen / max(steps + 1, 1)
-        if total_vol > avg_vol * 1.2 and steps < horizon - 100:
+        if total_vol > avg_vol * 1.2 and steps < horizon - 100 and env.inventory < env.max_inventory:
             action = 1
         elif steps >= horizon - 50 and env.inventory > 0:
             action = 2

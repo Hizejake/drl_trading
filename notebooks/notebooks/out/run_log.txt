@@ -1,0 +1,10 @@
+data=data/raw/lobster_aapl_10_level.csv
+macro=None
+timesteps=10,000 reward=log_return device=cpu
+
+=== TRAIN ppo_cvml | 10,000 steps ===
+data=data/raw/lobster_aapl_10_level.csv
+macro=None
+timesteps=10,000 reward=log_return device=cpu
+
+=== TRAIN ppo_cvml | 10,000 steps ===
