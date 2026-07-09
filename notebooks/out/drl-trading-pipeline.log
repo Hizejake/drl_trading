@@ -1,23 +1,400 @@
-[{"stream_name":"stderr","time":5.392945036,"data":"Traceback (most recent call last):\n"}
-,{"stream_name":"stderr","time":5.393973334,"data":"  File \"\u003cstring\u003e\", line 1, in \u003cmodule\u003e\n"}
-,{"stream_name":"stderr","time":5.393978628,"data":"  File \"/usr/local/lib/python3.12/dist-packages/papermill/execute.py\", line 113, in execute_notebook\n"}
-,{"stream_name":"stderr","time":5.393986629,"data":"    kernel_name = papermill_engines.nb_kernel_name(engine_name=engine_name, nb=nb, name=kernel_name)\n"}
-,{"stream_name":"stderr","time":5.393989244,"data":"                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
-,{"stream_name":"stderr","time":5.393991821,"data":"  File \"/usr/local/lib/python3.12/dist-packages/papermill/engines.py\", line 53, in nb_kernel_name\n"}
-,{"stream_name":"stderr","time":5.39399423,"data":"    return self.get_engine(engine_name).nb_kernel_name(nb, name)\n"}
-,{"stream_name":"stderr","time":5.393996544,"data":"           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
-,{"stream_name":"stderr","time":5.393998868,"data":"  File \"/usr/local/lib/python3.12/dist-packages/papermill/engines.py\", line 386, in nb_kernel_name\n"}
-,{"stream_name":"stderr","time":5.394001227,"data":"    return nb_kernel_name(nb, name)\n"}
-,{"stream_name":"stderr","time":5.394003434,"data":"           ^^^^^^^^^^^^^^^^^^^^^^^^\n"}
-,{"stream_name":"stderr","time":5.394005626,"data":"  File \"/usr/local/lib/python3.12/dist-packages/papermill/utils.py\", line 52, in nb_kernel_name\n"}
-,{"stream_name":"stderr","time":5.394008022,"data":"    raise ValueError(\"No kernel name found in notebook and no override provided.\")\n"}
-,{"stream_name":"stderr","time":5.39401054,"data":"ValueError: No kernel name found in notebook and no override provided.\n"}
-,{"stream_name":"stderr","time":7.342684614,"data":"/usr/local/lib/python3.12/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
-,{"stream_name":"stderr","time":7.342716494,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
-,{"stream_name":"stderr","time":7.504949886,"data":"/usr/local/lib/python3.12/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
-,{"stream_name":"stderr","time":7.504985664,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
-,{"stream_name":"stderr","time":8.100156219,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to notebook\n"}
-,{"stream_name":"stderr","time":8.39572554,"data":"[NbConvertApp] Writing 45248 bytes to __notebook__.ipynb\n"}
-,{"stream_name":"stderr","time":10.693499084,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to html\n"}
-,{"stream_name":"stderr","time":11.984893078,"data":"[NbConvertApp] Writing 434133 bytes to __results__.html\n"}
+[{"stream_name":"stderr","time":7.138917755,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":7.139011682,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":7.139017688,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":7.139037286,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stderr","time":7.750166854,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":7.750197341,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":7.750202099,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":7.750205692,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stdout","time":11.517501402,"data":"\u001b[?25l   \u001b[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m \u001b[32m0.0/187.6 kB\u001b[0m \u001b[31m?\u001b[0m eta \u001b[36m-:--:--\u001b[0m\r\u001b[2K   \u001b[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m \u001b[32m187.6/187.6 kB\u001b[0m \u001b[31m5.4 MB/s\u001b[0m eta \u001b[36m0:00:00\u001b[0m\r\n"}
+,{"stream_name":"stdout","time":11.669901941,"data":"\u001b[?25h\u001b[?25l   \u001b[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m \u001b[32m0.0/12.2 MB\u001b[0m \u001b[31m?\u001b[0m eta \u001b[36m-:--:--\u001b[0m\r\u001b[2K   \u001b[91m━━━━━━━━━\u001b[0m\u001b[90m╺\u001b[0m\u001b[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m \u001b[32m2.7/12.2 MB\u001b[0m \u001b[31m82.2 MB/s\u001b[0m eta \u001b[36m0:00:01\u001b[0m\r\u001b[2K   \u001b[91m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m\u001b[91m╸\u001b[0m\u001b[90m━━━━━\u001b[0m \u001b[32m10.5/12.2 MB\u001b[0m \u001b[31m170.6 MB/s\u001b[0m eta \u001b[36m0:00:01\u001b[0m\r\u001b[2K   \u001b[91m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m\u001b[91m╸\u001b[0m \u001b[32m12.1/12.2 MB\u001b[0m \u001b[31m218.8 MB/s\u001b[0m eta \u001b[36m0:00:01\u001b[0m\r\u001b[2K   \u001b[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m \u001b[32m12.2/12.2 MB\u001b[0m \u001b[31m103.9 MB/s\u001b[0m eta \u001b[36m0:00:00\u001b[0m\r\n"}
+,{"stream_name":"stdout","time":14.448949884,"data":"\u001b[?25h\u001b[31mERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.\r\n"}
+,{"stream_name":"stdout","time":14.448981062,"data":"dask-cuda 26.2.0 requires cuda-core==0.3.*, but you have cuda-core 1.0.1 which is incompatible.\r\n"}
+,{"stream_name":"stdout","time":14.448987225,"data":"dask-cuda 26.2.0 requires numba-cuda\u003c0.23.0,\u003e=0.22.1, but you have numba-cuda 0.30.2 which is incompatible.\r\n"}
+,{"stream_name":"stdout","time":14.448992239,"data":"distributed-ucxx-cu12 0.48.0 requires numba-cuda[cu12]\u003c0.23.0,\u003e=0.22.1, but you have numba-cuda 0.30.2 which is incompatible.\r\n"}
+,{"stream_name":"stdout","time":14.448997074,"data":"cuml-cu12 26.2.0 requires numba\u003c0.62.0,\u003e=0.60.0, but you have numba 0.65.1 which is incompatible.\r\n"}
+,{"stream_name":"stdout","time":14.449013445,"data":"cuml-cu12 26.2.0 requires numba-cuda[cu12]\u003c0.23.0,\u003e=0.22.1, but you have numba-cuda 0.30.2 which is incompatible.\r\n"}
+,{"stream_name":"stdout","time":14.449018468,"data":"ucxx-cu12 0.48.0 requires numba-cuda[cu12]\u003c0.23.0,\u003e=0.22.1, but you have numba-cuda 0.30.2 which is incompatible.\r\n"}
+,{"stream_name":"stdout","time":14.449023556,"data":"cudf-cu12 26.2.1 requires numba\u003c0.62.0,\u003e=0.60.0, but you have numba 0.65.1 which is incompatible.\r\n"}
+,{"stream_name":"stdout","time":14.449027755,"data":"cudf-cu12 26.2.1 requires numba-cuda[cu12]\u003c0.23.0,\u003e=0.22.2, but you have numba-cuda 0.30.2 which is incompatible.\u001b[0m\u001b[31m\r\n"}
+,{"stream_name":"stderr","time":23.576530461,"data":"2026-07-09 11:07:44.911944: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:467] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered\n"}
+,{"stream_name":"stderr","time":23.577678182,"data":"WARNING: All log messages before absl::InitializeLog() is called are written to STDERR\n"}
+,{"stream_name":"stderr","time":23.577709717,"data":"E0000 00:00:1783595265.116014      23 cuda_dnn.cc:8579] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered\n"}
+,{"stream_name":"stderr","time":23.577715312,"data":"E0000 00:00:1783595265.174127      23 cuda_blas.cc:1407] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered\n"}
+,{"stream_name":"stderr","time":23.577719854,"data":"W0000 00:00:1783595265.674410      23 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.\n"}
+,{"stream_name":"stderr","time":23.577723851000002,"data":"W0000 00:00:1783595265.674451      23 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.\n"}
+,{"stream_name":"stderr","time":23.577727699,"data":"W0000 00:00:1783595265.674455      23 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.\n"}
+,{"stream_name":"stderr","time":23.577748962,"data":"W0000 00:00:1783595265.674457      23 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.\n"}
+,{"stream_name":"stderr","time":23.779890195,"data":"2026-07-09 11:07:44.911944: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:467] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered\n"}
+,{"stream_name":"stderr","time":23.779916089,"data":"WARNING: All log messages before absl::InitializeLog() is called are written to STDERR\n"}
+,{"stream_name":"stderr","time":23.779922258,"data":"E0000 00:00:1783595265.116014      23 cuda_dnn.cc:8579] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered\n"}
+,{"stream_name":"stderr","time":23.779927678,"data":"E0000 00:00:1783595265.174127      23 cuda_blas.cc:1407] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered\n"}
+,{"stream_name":"stderr","time":23.779951077,"data":"W0000 00:00:1783595265.674410      23 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.\n"}
+,{"stream_name":"stderr","time":23.779956613,"data":"W0000 00:00:1783595265.674451      23 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.\n"}
+,{"stream_name":"stderr","time":23.779972022,"data":"W0000 00:00:1783595265.674455      23 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.\n"}
+,{"stream_name":"stderr","time":23.779976702,"data":"W0000 00:00:1783595265.674457      23 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.\n"}
+,{"stream_name":"stderr","time":23.77998287,"data":"\n"}
+,{"stream_name":"stderr","time":23.779990777,"data":"2026-07-09 11:07:44.911944: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:467] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered\n"}
+,{"stream_name":"stderr","time":23.779994679,"data":"WARNING: All log messages before absl::InitializeLog() is called are written to STDERR\n"}
+,{"stream_name":"stderr","time":23.779997455,"data":"E0000 00:00:1783595265.116014      23 cuda_dnn.cc:8579] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered\n"}
+,{"stream_name":"stderr","time":23.780000379,"data":"E0000 00:00:1783595265.174127      23 cuda_blas.cc:1407] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered\n"}
+,{"stream_name":"stderr","time":23.780004482,"data":"W0000 00:00:1783595265.674410      23 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.\n"}
+,{"stream_name":"stderr","time":23.780007439,"data":"W0000 00:00:1783595265.674451      23 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.\n"}
+,{"stream_name":"stderr","time":23.780010261,"data":"W0000 00:00:1783595265.674455      23 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.\n"}
+,{"stream_name":"stderr","time":23.78001314,"data":"W0000 00:00:1783595265.674457      23 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.\n"}
+,{"stream_name":"stderr","time":37.250060506,"data":"Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.\n"}
+,{"stream_name":"stderr","time":37.250095517,"data":"Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.\n"}
+,{"stream_name":"stderr","time":37.250101969,"data":"Users of this version of Gym should be able to simply replace 'import gym' with 'import gymnasium as gym' in the vast majority of cases.\n"}
+,{"stream_name":"stderr","time":37.250106067,"data":"See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.\n"}
+,{"stream_name":"stderr","time":37.250110054,"data":"\n"}
+,{"stream_name":"stderr","time":37.250113396,"data":"Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.\n"}
+,{"stream_name":"stderr","time":37.250117148,"data":"Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.\n"}
+,{"stream_name":"stderr","time":37.250120872,"data":"Users of this version of Gym should be able to simply replace 'import gym' with 'import gymnasium as gym' in the vast majority of cases.\n"}
+,{"stream_name":"stderr","time":37.250124596,"data":"See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.\n"}
+,{"stream_name":"stdout","time":37.297292612,"data":"\u001b[0mtorch 2.10.0+cu128 | CUDA available: True\n"}
+,{"stream_name":"stdout","time":37.297317935,"data":"  GPU 0: Tesla T4\n"}
+,{"stream_name":"stdout","time":37.297323428,"data":"  GPU 1: Tesla T4\n"}
+,{"stream_name":"stdout","time":37.325477193,"data":"data=/kaggle/input/datasets/niko980/drl-trading-lob-data/lobster_aapl_10_level.csv\n"}
+,{"stream_name":"stdout","time":37.325497816,"data":"macro=/kaggle/input/datasets/niko980/drl-trading-lob-data/macro_vectors.npz\n"}
+,{"stream_name":"stdout","time":37.32550737,"data":"timesteps=10,000 reward=log_return device=cuda\n"}
+,{"stream_name":"stdout","time":37.526350215,"data":"\n"}
+,{"stream_name":"stdout","time":37.526379041,"data":"=== TRAIN ppo_cvml | 10,000 steps ===\n"}
+,{"stream_name":"stdout","time":37.526384137,"data":"[ENV] Aligned 12 macro events to 3268/3474 LOB rows\n"}
+,{"stream_name":"stdout","time":37.526392866,"data":"Using cuda device\n"}
+,{"stream_name":"stdout","time":37.5263974,"data":"Wrapping the env with a `Monitor` wrapper\n"}
+,{"stream_name":"stdout","time":37.526401704,"data":"Wrapping the env in a DummyVecEnv.\n"}
+,{"stream_name":"stdout","time":50.102640469,"data":"---------------------------------\n"}
+,{"stream_name":"stdout","time":50.10268263,"data":"| rollout/           |          |\n"}
+,{"stream_name":"stdout","time":50.10269301,"data":"|    ep_len_mean     | 256      |\n"}
+,{"stream_name":"stdout","time":50.102696847,"data":"|    ep_rew_mean     | 0.829    |\n"}
+,{"stream_name":"stdout","time":50.102700414,"data":"| time/              |          |\n"}
+,{"stream_name":"stdout","time":50.102703892,"data":"|    fps             | 314      |\n"}
+,{"stream_name":"stdout","time":50.102708836,"data":"|    iterations      | 1        |\n"}
+,{"stream_name":"stdout","time":50.102713609,"data":"|    time_elapsed    | 6        |\n"}
+,{"stream_name":"stdout","time":50.10271704,"data":"|    total_timesteps | 2048     |\n"}
+,{"stream_name":"stdout","time":50.10272054,"data":"---------------------------------\n"}
+,{"stream_name":"stdout","time":57.939500289,"data":"------------------------------------------\n"}
+,{"stream_name":"stdout","time":57.939533879,"data":"| rollout/                |              |\n"}
+,{"stream_name":"stdout","time":57.939540511,"data":"|    ep_len_mean          | 256          |\n"}
+,{"stream_name":"stdout","time":57.939544927,"data":"|    ep_rew_mean          | -26.9        |\n"}
+,{"stream_name":"stdout","time":57.939549113,"data":"| time/                   |              |\n"}
+,{"stream_name":"stdout","time":57.939553352,"data":"|    fps                  | 285          |\n"}
+,{"stream_name":"stdout","time":57.939558017,"data":"|    iterations           | 2            |\n"}
+,{"stream_name":"stdout","time":57.939562247,"data":"|    time_elapsed         | 14           |\n"}
+,{"stream_name":"stdout","time":57.939566546,"data":"|    total_timesteps      | 4096         |\n"}
+,{"stream_name":"stdout","time":57.939570714,"data":"| train/                  |              |\n"}
+,{"stream_name":"stdout","time":57.939574878,"data":"|    approx_kl            | 0.0017254035 |\n"}
+,{"stream_name":"stdout","time":57.939579022,"data":"|    clip_fraction        | 0            |\n"}
+,{"stream_name":"stdout","time":57.939583232,"data":"|    clip_range           | 0.2          |\n"}
+,{"stream_name":"stdout","time":57.939587231,"data":"|    entropy_loss         | -1.61        |\n"}
+,{"stream_name":"stdout","time":57.939595935,"data":"|    explained_variance   | -0.000258    |\n"}
+,{"stream_name":"stdout","time":57.939610151,"data":"|    learning_rate        | 0.000239     |\n"}
+,{"stream_name":"stdout","time":57.939612584,"data":"|    loss                 | 1.66e+03     |\n"}
+,{"stream_name":"stdout","time":57.939614752,"data":"|    n_updates            | 10           |\n"}
+,{"stream_name":"stdout","time":57.939617268,"data":"|    policy_gradient_loss | -0.00175     |\n"}
+,{"stream_name":"stdout","time":57.939619446,"data":"|    value_loss           | 2.47e+03     |\n"}
+,{"stream_name":"stdout","time":57.939621674,"data":"------------------------------------------\n"}
+,{"stream_name":"stdout","time":65.035553,"data":"-----------------------------------------\n"}
+,{"stream_name":"stdout","time":65.035592659,"data":"| rollout/                |             |\n"}
+,{"stream_name":"stdout","time":65.035597144,"data":"|    ep_len_mean          | 256         |\n"}
+,{"stream_name":"stdout","time":65.035621553,"data":"|    ep_rew_mean          | 1.56        |\n"}
+,{"stream_name":"stdout","time":65.035626418,"data":"| time/                   |             |\n"}
+,{"stream_name":"stdout","time":65.035630518,"data":"|    fps                  | 286         |\n"}
+,{"stream_name":"stdout","time":65.035634483,"data":"|    iterations           | 3           |\n"}
+,{"stream_name":"stdout","time":65.035638846,"data":"|    time_elapsed         | 21          |\n"}
+,{"stream_name":"stdout","time":65.035643374,"data":"|    total_timesteps      | 6144        |\n"}
+,{"stream_name":"stdout","time":65.035647324,"data":"| train/                  |             |\n"}
+,{"stream_name":"stdout","time":65.035651002,"data":"|    approx_kl            | 0.011724234 |\n"}
+,{"stream_name":"stdout","time":65.035654662,"data":"|    clip_fraction        | 0.0149      |\n"}
+,{"stream_name":"stdout","time":65.035658287,"data":"|    clip_range           | 0.2         |\n"}
+,{"stream_name":"stdout","time":65.035661939,"data":"|    entropy_loss         | -1.6        |\n"}
+,{"stream_name":"stdout","time":65.035665515,"data":"|    explained_variance   | -0.0413     |\n"}
+,{"stream_name":"stdout","time":65.035670994,"data":"|    learning_rate        | 0.000177    |\n"}
+,{"stream_name":"stdout","time":65.035677893,"data":"|    loss                 | 571         |\n"}
+,{"stream_name":"stdout","time":65.035680476,"data":"|    n_updates            | 20          |\n"}
+,{"stream_name":"stdout","time":65.035682882,"data":"|    policy_gradient_loss | -0.00299    |\n"}
+,{"stream_name":"stdout","time":65.035685291,"data":"|    value_loss           | 889         |\n"}
+,{"stream_name":"stdout","time":65.035688266,"data":"-----------------------------------------\n"}
+,{"stream_name":"stdout","time":72.134846027,"data":"------------------------------------------\n"}
+,{"stream_name":"stdout","time":72.134870199,"data":"| rollout/                |              |\n"}
+,{"stream_name":"stdout","time":72.134891026,"data":"|    ep_len_mean          | 256          |\n"}
+,{"stream_name":"stdout","time":72.134896512,"data":"|    ep_rew_mean          | -37.6        |\n"}
+,{"stream_name":"stdout","time":72.134901327,"data":"| time/                   |              |\n"}
+,{"stream_name":"stdout","time":72.134905675,"data":"|    fps                  | 287          |\n"}
+,{"stream_name":"stdout","time":72.134910236,"data":"|    iterations           | 4            |\n"}
+,{"stream_name":"stdout","time":72.134914688,"data":"|    time_elapsed         | 28           |\n"}
+,{"stream_name":"stdout","time":72.134919142,"data":"|    total_timesteps      | 8192         |\n"}
+,{"stream_name":"stdout","time":72.134923355,"data":"| train/                  |              |\n"}
+,{"stream_name":"stdout","time":72.134938049,"data":"|    approx_kl            | 0.0046591237 |\n"}
+,{"stream_name":"stdout","time":72.13495691,"data":"|    clip_fraction        | 0            |\n"}
+,{"stream_name":"stdout","time":72.134965233,"data":"|    clip_range           | 0.2          |\n"}
+,{"stream_name":"stdout","time":72.134970403,"data":"|    entropy_loss         | -1.6         |\n"}
+,{"stream_name":"stdout","time":72.134974465,"data":"|    explained_variance   | -0.0354      |\n"}
+,{"stream_name":"stdout","time":72.13497917,"data":"|    learning_rate        | 0.000116     |\n"}
+,{"stream_name":"stdout","time":72.13498359,"data":"|    loss                 | 651          |\n"}
+,{"stream_name":"stdout","time":72.13498818,"data":"|    n_updates            | 30           |\n"}
+,{"stream_name":"stdout","time":72.134992212,"data":"|    policy_gradient_loss | -0.0025      |\n"}
+,{"stream_name":"stdout","time":72.134996094,"data":"|    value_loss           | 1.62e+03     |\n"}
+,{"stream_name":"stdout","time":72.135000504,"data":"------------------------------------------\n"}
+,{"stream_name":"stdout","time":79.163709053,"data":"-------------------------------------------\n"}
+,{"stream_name":"stdout","time":79.16374356,"data":"| rollout/                |               |\n"}
+,{"stream_name":"stdout","time":79.16374708,"data":"|    ep_len_mean          | 256           |\n"}
+,{"stream_name":"stdout","time":79.163749562,"data":"|    ep_rew_mean          | -32.3         |\n"}
+,{"stream_name":"stdout","time":79.163752409,"data":"| time/                   |               |\n"}
+,{"stream_name":"stdout","time":79.163754709,"data":"|    fps                  | 287           |\n"}
+,{"stream_name":"stdout","time":79.163756883,"data":"|    iterations           | 5             |\n"}
+,{"stream_name":"stdout","time":79.163759058,"data":"|    time_elapsed         | 35            |\n"}
+,{"stream_name":"stdout","time":79.163761454,"data":"|    total_timesteps      | 10240         |\n"}
+,{"stream_name":"stdout","time":79.163776948,"data":"| train/                  |               |\n"}
+,{"stream_name":"stdout","time":79.163781048,"data":"|    approx_kl            | 0.00025179744 |\n"}
+,{"stream_name":"stdout","time":79.163784878,"data":"|    clip_fraction        | 0             |\n"}
+,{"stream_name":"stdout","time":79.163788562,"data":"|    clip_range           | 0.2           |\n"}
+,{"stream_name":"stdout","time":79.163792576,"data":"|    entropy_loss         | -1.59         |\n"}
+,{"stream_name":"stdout","time":79.163796318,"data":"|    explained_variance   | 0.023         |\n"}
+,{"stream_name":"stdout","time":79.163800163,"data":"|    learning_rate        | 5.42e-05      |\n"}
+,{"stream_name":"stdout","time":79.163803534,"data":"|    loss                 | 1.76e+03      |\n"}
+,{"stream_name":"stdout","time":79.163806815,"data":"|    n_updates            | 40            |\n"}
+,{"stream_name":"stdout","time":79.163810154,"data":"|    policy_gradient_loss | -0.00024      |\n"}
+,{"stream_name":"stdout","time":79.163813847,"data":"|    value_loss           | 4e+03         |\n"}
+,{"stream_name":"stdout","time":79.163817166,"data":"-------------------------------------------\n"}
+,{"stream_name":"stdout","time":81.02205999,"data":"ppo_cvml: trained in 37.4s, saved to /kaggle/working/models\n"}
+,{"stream_name":"stdout","time":81.221570815,"data":"\n"}
+,{"stream_name":"stdout","time":81.221605341,"data":"=== TRAIN ppo_cvml_nomacro | 10,000 steps ===\n"}
+,{"stream_name":"stdout","time":81.221611403,"data":"[ENV] Aligned 12 macro events to 3268/3474 LOB rows\n"}
+,{"stream_name":"stdout","time":81.221630304,"data":"Using cuda device\n"}
+,{"stream_name":"stdout","time":81.221634655,"data":"Wrapping the env with a `Monitor` wrapper\n"}
+,{"stream_name":"stdout","time":81.221638578,"data":"Wrapping the env in a DummyVecEnv.\n"}
+,{"stream_name":"stdout","time":86.196205541,"data":"---------------------------------\n"}
+,{"stream_name":"stdout","time":86.196239523,"data":"| rollout/           |          |\n"}
+,{"stream_name":"stdout","time":86.196245155,"data":"|    ep_len_mean     | 256      |\n"}
+,{"stream_name":"stdout","time":86.196249039,"data":"|    ep_rew_mean     | 13       |\n"}
+,{"stream_name":"stdout","time":86.196252812,"data":"| time/              |          |\n"}
+,{"stream_name":"stdout","time":86.196257149,"data":"|    fps             | 400      |\n"}
+,{"stream_name":"stdout","time":86.196260832,"data":"|    iterations      | 1        |\n"}
+,{"stream_name":"stdout","time":86.196264304,"data":"|    time_elapsed    | 5        |\n"}
+,{"stream_name":"stdout","time":86.196267983,"data":"|    total_timesteps | 2048     |\n"}
+,{"stream_name":"stdout","time":86.196271603,"data":"---------------------------------\n"}
+,{"stream_name":"stdout","time":93.272910494,"data":"------------------------------------------\n"}
+,{"stream_name":"stdout","time":93.272956083,"data":"| rollout/                |              |\n"}
+,{"stream_name":"stdout","time":93.272965107,"data":"|    ep_len_mean          | 256          |\n"}
+,{"stream_name":"stdout","time":93.272968803,"data":"|    ep_rew_mean          | -2.3         |\n"}
+,{"stream_name":"stdout","time":93.272971993,"data":"| time/                   |              |\n"}
+,{"stream_name":"stdout","time":93.272975132,"data":"|    fps                  | 336          |\n"}
+,{"stream_name":"stdout","time":93.272978422,"data":"|    iterations           | 2            |\n"}
+,{"stream_name":"stdout","time":93.272981905,"data":"|    time_elapsed         | 12           |\n"}
+,{"stream_name":"stdout","time":93.272984843,"data":"|    total_timesteps      | 4096         |\n"}
+,{"stream_name":"stdout","time":93.272988207,"data":"| train/                  |              |\n"}
+,{"stream_name":"stdout","time":93.272991303,"data":"|    approx_kl            | 0.0014545505 |\n"}
+,{"stream_name":"stdout","time":93.272994552,"data":"|    clip_fraction        | 0            |\n"}
+,{"stream_name":"stdout","time":93.272997958,"data":"|    clip_range           | 0.2          |\n"}
+,{"stream_name":"stdout","time":93.273001118,"data":"|    entropy_loss         | -1.61        |\n"}
+,{"stream_name":"stdout","time":93.273004293,"data":"|    explained_variance   | -1.48e-05    |\n"}
+,{"stream_name":"stdout","time":93.273007593,"data":"|    learning_rate        | 0.000239     |\n"}
+,{"stream_name":"stdout","time":93.273010937,"data":"|    loss                 | 691          |\n"}
+,{"stream_name":"stdout","time":93.273014404,"data":"|    n_updates            | 10           |\n"}
+,{"stream_name":"stdout","time":93.273017723,"data":"|    policy_gradient_loss | 0.000398     |\n"}
+,{"stream_name":"stdout","time":93.273021014,"data":"|    value_loss           | 1.14e+03     |\n"}
+,{"stream_name":"stdout","time":93.273024272,"data":"------------------------------------------\n"}
+,{"stream_name":"stdout","time":100.269226344,"data":"-----------------------------------------\n"}
+,{"stream_name":"stdout","time":100.269260267,"data":"| rollout/                |             |\n"}
+,{"stream_name":"stdout","time":100.269266199,"data":"|    ep_len_mean          | 256         |\n"}
+,{"stream_name":"stdout","time":100.26927044,"data":"|    ep_rew_mean          | -115        |\n"}
+,{"stream_name":"stdout","time":100.269289546,"data":"| time/                   |             |\n"}
+,{"stream_name":"stdout","time":100.269296987,"data":"|    fps                  | 320         |\n"}
+,{"stream_name":"stdout","time":100.269299246,"data":"|    iterations           | 3           |\n"}
+,{"stream_name":"stdout","time":100.269301437,"data":"|    time_elapsed         | 19          |\n"}
+,{"stream_name":"stdout","time":100.269303607,"data":"|    total_timesteps      | 6144        |\n"}
+,{"stream_name":"stdout","time":100.269305817,"data":"| train/                  |             |\n"}
+,{"stream_name":"stdout","time":100.269311222,"data":"|    approx_kl            | 0.013122804 |\n"}
+,{"stream_name":"stdout","time":100.269313654,"data":"|    clip_fraction        | 0.0398      |\n"}
+,{"stream_name":"stdout","time":100.269316084,"data":"|    clip_range           | 0.2         |\n"}
+,{"stream_name":"stdout","time":100.269318375,"data":"|    entropy_loss         | -1.6        |\n"}
+,{"stream_name":"stdout","time":100.269320637,"data":"|    explained_variance   | -6.69e-05   |\n"}
+,{"stream_name":"stdout","time":100.269322813,"data":"|    learning_rate        | 0.000177    |\n"}
+,{"stream_name":"stdout","time":100.269325852,"data":"|    loss                 | 279         |\n"}
+,{"stream_name":"stdout","time":100.269328056,"data":"|    n_updates            | 20          |\n"}
+,{"stream_name":"stdout","time":100.269331152,"data":"|    policy_gradient_loss | -0.00277    |\n"}
+,{"stream_name":"stdout","time":100.269348284,"data":"|    value_loss           | 908         |\n"}
+,{"stream_name":"stdout","time":100.269352141,"data":"-----------------------------------------\n"}
+,{"stream_name":"stdout","time":107.245031055,"data":"-----------------------------------------\n"}
+,{"stream_name":"stdout","time":107.245060755,"data":"| rollout/                |             |\n"}
+,{"stream_name":"stdout","time":107.245066108,"data":"|    ep_len_mean          | 256         |\n"}
+,{"stream_name":"stdout","time":107.245070116,"data":"|    ep_rew_mean          | -124        |\n"}
+,{"stream_name":"stdout","time":107.245073982,"data":"| time/                   |             |\n"}
+,{"stream_name":"stdout","time":107.245077994,"data":"|    fps                  | 313         |\n"}
+,{"stream_name":"stdout","time":107.245082257,"data":"|    iterations           | 4           |\n"}
+,{"stream_name":"stdout","time":107.245086155,"data":"|    time_elapsed         | 26          |\n"}
+,{"stream_name":"stdout","time":107.245089903,"data":"|    total_timesteps      | 8192        |\n"}
+,{"stream_name":"stdout","time":107.245093097,"data":"| train/                  |             |\n"}
+,{"stream_name":"stdout","time":107.245096513,"data":"|    approx_kl            | 0.007277351 |\n"}
+,{"stream_name":"stdout","time":107.245099863,"data":"|    clip_fraction        | 0           |\n"}
+,{"stream_name":"stdout","time":107.245103345,"data":"|    clip_range           | 0.2         |\n"}
+,{"stream_name":"stdout","time":107.245106725,"data":"|    entropy_loss         | -1.6        |\n"}
+,{"stream_name":"stdout","time":107.245110365,"data":"|    explained_variance   | 4.65e-06    |\n"}
+,{"stream_name":"stdout","time":107.245117905,"data":"|    learning_rate        | 0.000116    |\n"}
+,{"stream_name":"stdout","time":107.245120375,"data":"|    loss                 | 1.62e+03    |\n"}
+,{"stream_name":"stdout","time":107.245122585,"data":"|    n_updates            | 30          |\n"}
+,{"stream_name":"stdout","time":107.245124789,"data":"|    policy_gradient_loss | -0.00256    |\n"}
+,{"stream_name":"stdout","time":107.245139749,"data":"|    value_loss           | 5.91e+03    |\n"}
+,{"stream_name":"stdout","time":107.245142232,"data":"-----------------------------------------\n"}
+,{"stream_name":"stdout","time":114.21151129,"data":"-----------------------------------------\n"}
+,{"stream_name":"stdout","time":114.211543834,"data":"| rollout/                |             |\n"}
+,{"stream_name":"stdout","time":114.211550077,"data":"|    ep_len_mean          | 256         |\n"}
+,{"stream_name":"stdout","time":114.211554515,"data":"|    ep_rew_mean          | -136        |\n"}
+,{"stream_name":"stdout","time":114.211558884,"data":"| time/                   |             |\n"}
+,{"stream_name":"stdout","time":114.21156385,"data":"|    fps                  | 309         |\n"}
+,{"stream_name":"stdout","time":114.21156793,"data":"|    iterations           | 5           |\n"}
+,{"stream_name":"stdout","time":114.211572266,"data":"|    time_elapsed         | 33          |\n"}
+,{"stream_name":"stdout","time":114.211576384,"data":"|    total_timesteps      | 10240       |\n"}
+,{"stream_name":"stdout","time":114.211580563,"data":"| train/                  |             |\n"}
+,{"stream_name":"stdout","time":114.211584653,"data":"|    approx_kl            | 0.002719317 |\n"}
+,{"stream_name":"stdout","time":114.211589171,"data":"|    clip_fraction        | 0           |\n"}
+,{"stream_name":"stdout","time":114.211593428,"data":"|    clip_range           | 0.2         |\n"}
+,{"stream_name":"stdout","time":114.211597438,"data":"|    entropy_loss         | -1.6        |\n"}
+,{"stream_name":"stdout","time":114.211602225,"data":"|    explained_variance   | 2.98e-06    |\n"}
+,{"stream_name":"stdout","time":114.211622933,"data":"|    learning_rate        | 5.42e-05    |\n"}
+,{"stream_name":"stdout","time":114.211627964,"data":"|    loss                 | 1.57e+03    |\n"}
+,{"stream_name":"stdout","time":114.211632465,"data":"|    n_updates            | 40          |\n"}
+,{"stream_name":"stdout","time":114.211637002,"data":"|    policy_gradient_loss | -0.00265    |\n"}
+,{"stream_name":"stdout","time":114.211641719,"data":"|    value_loss           | 3.98e+03    |\n"}
+,{"stream_name":"stdout","time":114.211646448,"data":"-----------------------------------------\n"}
+,{"stream_name":"stdout","time":116.069955521,"data":"ppo_cvml_nomacro: trained in 35.0s, saved to /kaggle/working/models\n"}
+,{"stream_name":"stdout","time":116.270579661,"data":"\n"}
+,{"stream_name":"stdout","time":116.270613817,"data":"=== TRAIN ppo_flat | 10,000 steps ===\n"}
+,{"stream_name":"stdout","time":116.270620711,"data":"[ENV] Aligned 12 macro events to 3268/3474 LOB rows\n"}
+,{"stream_name":"stdout","time":116.270626248,"data":"Using cuda device\n"}
+,{"stream_name":"stdout","time":116.270641301,"data":"Wrapping the env with a `Monitor` wrapper\n"}
+,{"stream_name":"stdout","time":116.270645702,"data":"Wrapping the env in a DummyVecEnv.\n"}
+,{"stream_name":"stdout","time":121.130464924,"data":"---------------------------------\n"}
+,{"stream_name":"stdout","time":121.130503036,"data":"| rollout/           |          |\n"}
+,{"stream_name":"stdout","time":121.130507282,"data":"|    ep_len_mean     | 256      |\n"}
+,{"stream_name":"stdout","time":121.13051046,"data":"|    ep_rew_mean     | 18.9     |\n"}
+,{"stream_name":"stdout","time":121.130513477,"data":"| time/              |          |\n"}
+,{"stream_name":"stdout","time":121.130516638,"data":"|    fps             | 409      |\n"}
+,{"stream_name":"stdout","time":121.130519489,"data":"|    iterations      | 1        |\n"}
+,{"stream_name":"stdout","time":121.130522299,"data":"|    time_elapsed    | 5        |\n"}
+,{"stream_name":"stdout","time":121.130535677,"data":"|    total_timesteps | 2048     |\n"}
+,{"stream_name":"stdout","time":121.130538188,"data":"---------------------------------\n"}
+,{"stream_name":"stdout","time":127.899785049,"data":"------------------------------------------\n"}
+,{"stream_name":"stdout","time":127.899820096,"data":"| rollout/                |              |\n"}
+,{"stream_name":"stdout","time":127.899826772,"data":"|    ep_len_mean          | 256          |\n"}
+,{"stream_name":"stdout","time":127.899831181,"data":"|    ep_rew_mean          | -23.4        |\n"}
+,{"stream_name":"stdout","time":127.899835658,"data":"| time/                   |              |\n"}
+,{"stream_name":"stdout","time":127.89983987,"data":"|    fps                  | 347          |\n"}
+,{"stream_name":"stdout","time":127.899844461,"data":"|    iterations           | 2            |\n"}
+,{"stream_name":"stdout","time":127.899848656,"data":"|    time_elapsed         | 11           |\n"}
+,{"stream_name":"stdout","time":127.899853078,"data":"|    total_timesteps      | 4096         |\n"}
+,{"stream_name":"stdout","time":127.899857361,"data":"| train/                  |              |\n"}
+,{"stream_name":"stdout","time":127.89986193,"data":"|    approx_kl            | 0.0010799909 |\n"}
+,{"stream_name":"stdout","time":127.899866182,"data":"|    clip_fraction        | 0            |\n"}
+,{"stream_name":"stdout","time":127.899871111,"data":"|    clip_range           | 0.2          |\n"}
+,{"stream_name":"stdout","time":127.899875226,"data":"|    entropy_loss         | -1.61        |\n"}
+,{"stream_name":"stdout","time":127.899879554,"data":"|    explained_variance   | 0.000342     |\n"}
+,{"stream_name":"stdout","time":127.899884441,"data":"|    learning_rate        | 0.000239     |\n"}
+,{"stream_name":"stdout","time":127.899888991,"data":"|    loss                 | 341          |\n"}
+,{"stream_name":"stdout","time":127.899893524,"data":"|    n_updates            | 10           |\n"}
+,{"stream_name":"stdout","time":127.899897772,"data":"|    policy_gradient_loss | -0.000972    |\n"}
+,{"stream_name":"stdout","time":127.899901942,"data":"|    value_loss           | 601          |\n"}
+,{"stream_name":"stdout","time":127.899906233,"data":"------------------------------------------\n"}
+,{"stream_name":"stdout","time":134.60796482,"data":"-----------------------------------------\n"}
+,{"stream_name":"stdout","time":134.607997737,"data":"| rollout/                |             |\n"}
+,{"stream_name":"stdout","time":134.608002727,"data":"|    ep_len_mean          | 256         |\n"}
+,{"stream_name":"stdout","time":134.608006086,"data":"|    ep_rew_mean          | -67         |\n"}
+,{"stream_name":"stdout","time":134.608009328,"data":"| time/                   |             |\n"}
+,{"stream_name":"stdout","time":134.608012461,"data":"|    fps                  | 332         |\n"}
+,{"stream_name":"stdout","time":134.608030005,"data":"|    iterations           | 3           |\n"}
+,{"stream_name":"stdout","time":134.608033667,"data":"|    time_elapsed         | 18          |\n"}
+,{"stream_name":"stdout","time":134.608037201,"data":"|    total_timesteps      | 6144        |\n"}
+,{"stream_name":"stdout","time":134.608040774,"data":"| train/                  |             |\n"}
+,{"stream_name":"stdout","time":134.608044097,"data":"|    approx_kl            | 0.006712801 |\n"}
+,{"stream_name":"stdout","time":134.608047323,"data":"|    clip_fraction        | 0.0292      |\n"}
+,{"stream_name":"stdout","time":134.608050485,"data":"|    clip_range           | 0.2         |\n"}
+,{"stream_name":"stdout","time":134.608068856,"data":"|    entropy_loss         | -1.6        |\n"}
+,{"stream_name":"stdout","time":134.60807258,"data":"|    explained_variance   | -0.0273     |\n"}
+,{"stream_name":"stdout","time":134.608075516,"data":"|    learning_rate        | 0.000177    |\n"}
+,{"stream_name":"stdout","time":134.608079177,"data":"|    loss                 | 1.91e+03    |\n"}
+,{"stream_name":"stdout","time":134.608082478,"data":"|    n_updates            | 20          |\n"}
+,{"stream_name":"stdout","time":134.608085703,"data":"|    policy_gradient_loss | -0.00396    |\n"}
+,{"stream_name":"stdout","time":134.608088764,"data":"|    value_loss           | 2.6e+03     |\n"}
+,{"stream_name":"stdout","time":134.608091963,"data":"-----------------------------------------\n"}
+,{"stream_name":"stdout","time":141.216026312,"data":"-----------------------------------------\n"}
+,{"stream_name":"stdout","time":141.216055774,"data":"| rollout/                |             |\n"}
+,{"stream_name":"stdout","time":141.216061515,"data":"|    ep_len_mean          | 256         |\n"}
+,{"stream_name":"stdout","time":141.216065892,"data":"|    ep_rew_mean          | -60.8       |\n"}
+,{"stream_name":"stdout","time":141.216069492,"data":"| time/                   |             |\n"}
+,{"stream_name":"stdout","time":141.216072899,"data":"|    fps                  | 326         |\n"}
+,{"stream_name":"stdout","time":141.21607623,"data":"|    iterations           | 4           |\n"}
+,{"stream_name":"stdout","time":141.21607974,"data":"|    time_elapsed         | 25          |\n"}
+,{"stream_name":"stdout","time":141.216083947,"data":"|    total_timesteps      | 8192        |\n"}
+,{"stream_name":"stdout","time":141.216087379,"data":"| train/                  |             |\n"}
+,{"stream_name":"stdout","time":141.216090986,"data":"|    approx_kl            | 0.008500438 |\n"}
+,{"stream_name":"stdout","time":141.216094789,"data":"|    clip_fraction        | 0.0233      |\n"}
+,{"stream_name":"stdout","time":141.216098441,"data":"|    clip_range           | 0.2         |\n"}
+,{"stream_name":"stdout","time":141.216101906,"data":"|    entropy_loss         | -1.59       |\n"}
+,{"stream_name":"stdout","time":141.216105672,"data":"|    explained_variance   | -0.0439     |\n"}
+,{"stream_name":"stdout","time":141.216109392,"data":"|    learning_rate        | 0.000116    |\n"}
+,{"stream_name":"stdout","time":141.216113123,"data":"|    loss                 | 568         |\n"}
+,{"stream_name":"stdout","time":141.216119691,"data":"|    n_updates            | 30          |\n"}
+,{"stream_name":"stdout","time":141.216123609,"data":"|    policy_gradient_loss | -0.00176    |\n"}
+,{"stream_name":"stdout","time":141.216126911,"data":"|    value_loss           | 2.29e+03    |\n"}
+,{"stream_name":"stdout","time":141.216130755,"data":"-----------------------------------------\n"}
+,{"stream_name":"stdout","time":147.917684994,"data":"-----------------------------------------\n"}
+,{"stream_name":"stdout","time":147.917722734,"data":"| rollout/                |             |\n"}
+,{"stream_name":"stdout","time":147.917727495,"data":"|    ep_len_mean          | 256         |\n"}
+,{"stream_name":"stdout","time":147.917730591,"data":"|    ep_rew_mean          | -69.3       |\n"}
+,{"stream_name":"stdout","time":147.917734188,"data":"| time/                   |             |\n"}
+,{"stream_name":"stdout","time":147.917751168,"data":"|    fps                  | 322         |\n"}
+,{"stream_name":"stdout","time":147.917756751,"data":"|    iterations           | 5           |\n"}
+,{"stream_name":"stdout","time":147.917761971,"data":"|    time_elapsed         | 31          |\n"}
+,{"stream_name":"stdout","time":147.917776281,"data":"|    total_timesteps      | 10240       |\n"}
+,{"stream_name":"stdout","time":147.917779874,"data":"| train/                  |             |\n"}
+,{"stream_name":"stdout","time":147.917783109,"data":"|    approx_kl            | 0.004538355 |\n"}
+,{"stream_name":"stdout","time":147.917786403,"data":"|    clip_fraction        | 0           |\n"}
+,{"stream_name":"stdout","time":147.917789734,"data":"|    clip_range           | 0.2         |\n"}
+,{"stream_name":"stdout","time":147.917793011,"data":"|    entropy_loss         | -1.58       |\n"}
+,{"stream_name":"stdout","time":147.917796218,"data":"|    explained_variance   | -0.00177    |\n"}
+,{"stream_name":"stdout","time":147.917799687,"data":"|    learning_rate        | 5.42e-05    |\n"}
+,{"stream_name":"stdout","time":147.917802905,"data":"|    loss                 | 2.16e+03    |\n"}
+,{"stream_name":"stdout","time":147.917806131,"data":"|    n_updates            | 40          |\n"}
+,{"stream_name":"stdout","time":147.917809386,"data":"|    policy_gradient_loss | -0.00174    |\n"}
+,{"stream_name":"stdout","time":147.917812741,"data":"|    value_loss           | 2.43e+03    |\n"}
+,{"stream_name":"stdout","time":147.917820899,"data":"-----------------------------------------\n"}
+,{"stream_name":"stdout","time":149.662878922,"data":"ppo_flat: trained in 33.5s, saved to /kaggle/working/models\n"}
+,{"stream_name":"stdout","time":149.864214692,"data":"[ENV] Aligned 12 macro events to 3268/3474 LOB rows\n"}
+,{"stream_name":"stdout","time":151.889726681,"data":"[ENV] Aligned 12 macro events to 3268/3474 LOB rows\n"}
+,{"stream_name":"stdout","time":153.808825026,"data":"[ENV] Aligned 12 macro events to 3268/3474 LOB rows\n"}
+,{"stream_name":"stdout","time":156.160285745,"data":"[ENV] Aligned 12 macro events to 3268/3474 LOB rows\n"}
+,{"stream_name":"stdout","time":157.649250064,"data":"[ENV] Aligned 12 macro events to 3268/3474 LOB rows\n"}
+,{"stream_name":"stdout","time":157.649283648,"data":"[ENV] Aligned 12 macro events to 3268/3474 LOB rows\n"}
+,{"stream_name":"stdout","time":158.282210743,"data":"[ENV] Aligned 12 macro events to 3268/3474 LOB rows\n"}
+,{"stream_name":"stdout","time":158.28223775,"data":"\n"}
+,{"stream_name":"stdout","time":158.282242282,"data":"==================================================================================================\n"}
+,{"stream_name":"stdout","time":158.282246165,"data":"                       OUT-OF-SAMPLE EVALUATION (held-out last 30% of data)                       \n"}
+,{"stream_name":"stdout","time":158.282250345,"data":"==================================================================================================\n"}
+,{"stream_name":"stdout","time":158.28225471,"data":"             Model   Return%    Sharpe    MaxDD%  Trades   Buy  Sell    Final PV     Inv\n"}
+,{"stream_name":"stdout","time":158.282258542,"data":"--------------------------------------------------------------------------------------------------\n"}
+,{"stream_name":"stdout","time":158.282262939,"data":"    PPO+CVML+Macro   13.8670    1.0172  -14.5569      37    37     0  $ 11386.70      37\n"}
+,{"stream_name":"stdout","time":158.282267271,"data":"          PPO+CVML  -15.8561   -0.9775  -26.1006      41     0    41  $  8414.39     -41\n"}
+,{"stream_name":"stdout","time":158.282271287,"data":"       PPO+FlatMLP  -15.8561   -0.9775  -26.1006      41     0    41  $  8414.39     -41\n"}
+,{"stream_name":"stdout","time":158.282274788,"data":"          Buy\u0026Hold   13.8670    1.0172  -14.5569      37    37     0  $ 11386.70      37\n"}
+,{"stream_name":"stdout","time":158.282278655,"data":"              TWAP    8.1981    1.6710   -4.0618      38    19    19  $ 10819.81       0\n"}
+,{"stream_name":"stdout","time":158.282298011,"data":"              VWAP    4.3390    2.0486   -1.7076     468   234   234  $ 10433.90       0\n"}
+,{"stream_name":"stdout","time":158.282301626,"data":"            Random   -3.5911   -1.1046   -8.1995     603   294   309  $  9640.89     -15\n"}
+,{"stream_name":"stdout","time":158.282304868,"data":"==================================================================================================\n"}
+,{"stream_name":"stdout","time":158.359027135,"data":"[ENV] Aligned 12 macro events to 3268/3474 LOB rows\n"}
+,{"stream_name":"stdout","time":160.461535417,"data":"[ENV] Aligned 12 macro events to 3268/3474 LOB rows\n"}
+,{"stream_name":"stdout","time":162.397983198,"data":"[ENV] Aligned 12 macro events to 3268/3474 LOB rows\n"}
+,{"stream_name":"stdout","time":164.816481406,"data":"[ENV] Aligned 12 macro events to 3268/3474 LOB rows\n"}
+,{"stream_name":"stdout","time":165.086688843,"data":"\n"}
+,{"stream_name":"stdout","time":165.086716741,"data":"Saved equity_curves.png; artifacts in /kaggle/working\n"}
+,{"stream_name":"stderr","time":170.487721168,"data":"/usr/local/lib/python3.12/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":170.487761143,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":170.636479886,"data":"/usr/local/lib/python3.12/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":170.636506492,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":171.281291898,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to notebook\n"}
+,{"stream_name":"stderr","time":171.592012907,"data":"[NbConvertApp] Writing 223261 bytes to __notebook__.ipynb\n"}
+,{"stream_name":"stderr","time":173.938458011,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to html\n"}
+,{"stream_name":"stderr","time":174.878596895,"data":"[NbConvertApp] Support files will be in __results___files/\n"}
+,{"stream_name":"stderr","time":174.878624147,"data":"[NbConvertApp] Making directory __results___files\n"}
+,{"stream_name":"stderr","time":174.87899487,"data":"[NbConvertApp] Writing 456734 bytes to __results__.html\n"}
 ]

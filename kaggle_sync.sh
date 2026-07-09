@@ -5,7 +5,8 @@
 #   ./kaggle_sync.sh data-update  push new data as a new dataset version
 #   ./kaggle_sync.sh push         upload notebooks/ and start a GPU run
 #   ./kaggle_sync.sh status       poll the run
-#   ./kaggle_sync.sh pull         download executed notebook + outputs -> notebooks/out/
+#   ./kaggle_sync.sh pull         download run outputs -> notebooks/out/ and embed
+#                                 them back into notebooks/drl_trading_pipeline.ipynb
 #   ./kaggle_sync.sh log          tail the pulled run_log.txt
 #
 # Requires ~/.kaggle/kaggle.json (chmod 600). You edit the notebook locally;
@@ -29,7 +30,11 @@ case "${1:-help}" in
   data-update) kaggle datasets version -p "$DATA_DIR" -m "update $(date -u +%FT%TZ)" ;;
   push)        kaggle kernels push   -p "$NB_DIR"; echo "Pushed -> track with: $0 status" ;;
   status)      kaggle kernels status "$KERNEL" ;;
-  pull)        mkdir -p "$OUT_DIR"; kaggle kernels output "$KERNEL" -p "$OUT_DIR"; echo "Outputs -> $OUT_DIR" ;;
+  pull)        mkdir -p "$OUT_DIR"; kaggle kernels output "$KERNEL" -p "$OUT_DIR"; echo "Outputs -> $OUT_DIR"
+               # Kaggle's API returns working-dir artifacts + a flat log, but NOT
+               # the executed notebook. Reattach the run's real outputs (per-cell
+               # stdout + the equity-curves figure) so the repo .ipynb shows them.
+               python "$REPO/embed_kaggle_outputs.py" ;;
   log)         tail -n 60 "$OUT_DIR/run_log.txt" 2>/dev/null || echo "No run_log.txt yet — run '$0 pull' after a run finishes." ;;
   *)           grep -E '^#( |!)' "$0" | sed 's/^#[ !]\{0,1\}//' ;;
 esac

@@ -97,18 +97,29 @@ DEVICE = "cuda" if torch.cuda.is_available() else "cpu\"""")
 # CELL: Config
 # ═════════════════════════════════════════════════════════════════════════════
 code(f"""# ── CONFIGURATION ────────────────────────────────────────────────────────────
-KAGGLE_INPUT = "/kaggle/input/drl-trading-lob-data"
-ON_KAGGLE = os.path.exists(KAGGLE_INPUT)
+import glob
 
-DATA_DIR = KAGGLE_INPUT if ON_KAGGLE else "data/raw"
+ON_KAGGLE = os.path.exists("/kaggle/input")
 OUT_DIR = "/kaggle/working" if ON_KAGGLE else "notebooks/out"
 MODELS_DIR = os.path.join(OUT_DIR, "models")
 os.makedirs(MODELS_DIR, exist_ok=True)
 
-DATA_PATH = os.path.join(DATA_DIR, "lobster_aapl_10_level.csv")
-if not os.path.exists(DATA_PATH):
-    DATA_PATH = os.path.join(DATA_DIR, "synthetic_lob_10_level.csv")
+if ON_KAGGLE:
+    # Discover the mounted dataset rather than guessing its slug
+    hits = glob.glob("/kaggle/input/**/lobster_aapl_10_level.csv", recursive=True)
+    if not hits:
+        print("Contents of /kaggle/input:")
+        for root, dirs, files in os.walk("/kaggle/input"):
+            for name in files:
+                print(" ", os.path.join(root, name))
+        raise FileNotFoundError(
+            "lobster_aapl_10_level.csv not found under /kaggle/input — "
+            "is the drl-trading-lob-data dataset attached and processed?")
+    DATA_DIR = os.path.dirname(hits[0])
+else:
+    DATA_DIR = "data/raw"
 
+DATA_PATH = os.path.join(DATA_DIR, "lobster_aapl_10_level.csv")
 MACRO_PATH = os.path.join(DATA_DIR, "macro_vectors.npz")
 if not os.path.exists(MACRO_PATH):
     MACRO_PATH = None
