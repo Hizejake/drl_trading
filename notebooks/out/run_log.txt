@@ -1,28 +1,28 @@
 data=/kaggle/input/datasets/niko980/drl-trading-lob-data/lobster_aapl_10_level.csv
 macro=/kaggle/input/datasets/niko980/drl-trading-lob-data/macro_vectors.npz
-timesteps=10,000 reward=log_return device=cuda
+timesteps=5,000 reward=log_return device=cuda
 
-=== TRAIN ppo_cvml | 10,000 steps ===
-ppo_cvml: trained in 37.4s, saved to /kaggle/working/models
+=== TRAIN ppo_cvml | 5,000 steps ===
+ppo_cvml: trained in 24.5s, saved to /kaggle/working/models
 
-=== TRAIN ppo_cvml_nomacro | 10,000 steps ===
-ppo_cvml_nomacro: trained in 35.0s, saved to /kaggle/working/models
+=== TRAIN ppo_cvml_nomacro | 5,000 steps ===
+ppo_cvml_nomacro: trained in 22.8s, saved to /kaggle/working/models
 
-=== TRAIN ppo_flat | 10,000 steps ===
-ppo_flat: trained in 33.5s, saved to /kaggle/working/models
+=== TRAIN ppo_flat | 5,000 steps ===
+ppo_flat: trained in 21.7s, saved to /kaggle/working/models
 
 ==================================================================================================
                        OUT-OF-SAMPLE EVALUATION (held-out last 30% of data)                       
 ==================================================================================================
              Model   Return%    Sharpe    MaxDD%  Trades   Buy  Sell    Final PV     Inv
 --------------------------------------------------------------------------------------------------
-    PPO+CVML+Macro   13.8670    1.0172  -14.5569      37    37     0  $ 11386.70      37
-          PPO+CVML  -15.8561   -0.9775  -26.1006      41     0    41  $  8414.39     -41
-       PPO+FlatMLP  -15.8561   -0.9775  -26.1006      41     0    41  $  8414.39     -41
-          Buy&Hold   13.8670    1.0172  -14.5569      37    37     0  $ 11386.70      37
+    PPO+CVML+Macro   14.2590    1.0544  -14.2372      37    37     0  $ 11425.90      37
+          PPO+CVML   14.3201    1.0477  -14.5667      37    37     0  $ 11432.01      37
+       PPO+FlatMLP   14.3915    1.0495  -14.5569      37    37     0  $ 11439.15      37
+          Buy&Hold   14.3915    1.0495  -14.5569      37    37     0  $ 11439.15      37
               TWAP    8.1981    1.6710   -4.0618      38    19    19  $ 10819.81       0
               VWAP    4.3390    2.0486   -1.7076     468   234   234  $ 10433.90       0
-            Random   -3.5911   -1.1046   -8.1995     603   294   309  $  9640.89     -15
+            Random    4.2202    0.7742   -7.1112     582   297   285  $ 10422.02      12
 ==================================================================================================
 
 Saved equity_curves.png; artifacts in /kaggle/working

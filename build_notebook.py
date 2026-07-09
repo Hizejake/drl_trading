@@ -11,7 +11,7 @@ import nbformat as nbf
 ROOT = os.path.dirname(os.path.abspath(__file__))
 
 # ── Smoke-test config baked into the generated notebook ──────────────────────
-TRAIN_TIMESTEPS = 10_000     # set to 500_000 for a full run
+TRAIN_TIMESTEPS = 5_000      # set to 500_000 for a full run
 
 nb = nbf.v4.new_notebook()
 # Kaggle's papermill runner requires an explicit kernelspec
