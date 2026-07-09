@@ -1,0 +1,188 @@
+[{"stream_name":"stderr","time":6.725569903,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":6.725618159,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":6.725622092,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":6.725624491,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stderr","time":7.324598575,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":7.324635574,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":7.3246394,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":7.324642337,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stdout","time":8.36569506,"data":"📝 Logging all output + errors → /kaggle/working/run_log.txt\n"}
+,{"stream_name":"stdout","time":11.131336976,"data":"\u001b[?25l   \u001b[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m \u001b[32m0.0/187.6 kB\u001b[0m \u001b[31m?\u001b[0m eta \u001b[36m-:--:--\u001b[0m\r\u001b[2K   \u001b[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m \u001b[32m187.6/187.6 kB\u001b[0m \u001b[31m6.1 MB/s\u001b[0m eta \u001b[36m0:00:00\u001b[0m\r\n"}
+,{"stream_name":"stdout","time":11.183790701,"data":"\u001b[?25h\u001b[?25l   \u001b[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m \u001b[32m0.0/93.0 kB\u001b[0m \u001b[31m?\u001b[0m eta \u001b[36m-:--:--\u001b[0m\r\u001b[2K   \u001b[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m \u001b[32m93.0/93.0 kB\u001b[0m \u001b[31m7.2 MB/s\u001b[0m eta \u001b[36m0:00:00\u001b[0m\r\n"}
+,{"stream_name":"stdout","time":11.337062898,"data":"\u001b[?25h\u001b[?25l   \u001b[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m \u001b[32m0.0/12.2 MB\u001b[0m \u001b[31m?\u001b[0m eta \u001b[36m-:--:--\u001b[0m\r\u001b[2K   \u001b[91m━━━━━━━━━━\u001b[0m\u001b[91m╸\u001b[0m\u001b[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m \u001b[32m3.2/12.2 MB\u001b[0m \u001b[31m97.1 MB/s\u001b[0m eta \u001b[36m0:00:01\u001b[0m\r\u001b[2K   \u001b[91m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m\u001b[91m╸\u001b[0m\u001b[90m━━━━━━━━━\u001b[0m \u001b[32m9.4/12.2 MB\u001b[0m \u001b[31m137.7 MB/s\u001b[0m eta \u001b[36m0:00:01\u001b[0m\r\u001b[2K   \u001b[91m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m\u001b[91m╸\u001b[0m \u001b[32m12.1/12.2 MB\u001b[0m \u001b[31m156.2 MB/s\u001b[0m eta \u001b[36m0:00:01\u001b[0m\r\u001b[2K   \u001b[91m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m\u001b[91m╸\u001b[0m \u001b[32m12.1/12.2 MB\u001b[0m \u001b[31m156.2 MB/s\u001b[0m eta \u001b[36m0:00:01\u001b[0m\r\u001b[2K   \u001b[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m \u001b[32m12.2/12.2 MB\u001b[0m \u001b[31m79.4 MB/s\u001b[0m eta \u001b[36m0:00:00\u001b[0m\r\n"}
+,{"stream_name":"stdout","time":14.178627371,"data":"\u001b[?25h\u001b[31mERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.\r\n"}
+,{"stream_name":"stdout","time":14.178678059,"data":"dask-cuda 26.2.0 requires cuda-core==0.3.*, but you have cuda-core 1.0.1 which is incompatible.\r\n"}
+,{"stream_name":"stdout","time":14.178684702,"data":"dask-cuda 26.2.0 requires numba-cuda\u003c0.23.0,\u003e=0.22.1, but you have numba-cuda 0.30.2 which is incompatible.\r\n"}
+,{"stream_name":"stdout","time":14.17868938,"data":"distributed-ucxx-cu12 0.48.0 requires numba-cuda[cu12]\u003c0.23.0,\u003e=0.22.1, but you have numba-cuda 0.30.2 which is incompatible.\r\n"}
+,{"stream_name":"stdout","time":14.178694021,"data":"cuml-cu12 26.2.0 requires numba\u003c0.62.0,\u003e=0.60.0, but you have numba 0.65.1 which is incompatible.\r\n"}
+,{"stream_name":"stdout","time":14.178698059,"data":"cuml-cu12 26.2.0 requires numba-cuda[cu12]\u003c0.23.0,\u003e=0.22.1, but you have numba-cuda 0.30.2 which is incompatible.\r\n"}
+,{"stream_name":"stdout","time":14.178701729,"data":"ucxx-cu12 0.48.0 requires numba-cuda[cu12]\u003c0.23.0,\u003e=0.22.1, but you have numba-cuda 0.30.2 which is incompatible.\r\n"}
+,{"stream_name":"stdout","time":14.178705391,"data":"cudf-cu12 26.2.1 requires numba\u003c0.62.0,\u003e=0.60.0, but you have numba 0.65.1 which is incompatible.\r\n"}
+,{"stream_name":"stdout","time":14.178708927,"data":"cudf-cu12 26.2.1 requires numba-cuda[cu12]\u003c0.23.0,\u003e=0.22.2, but you have numba-cuda 0.30.2 which is incompatible.\u001b[0m\u001b[31m\r\n"}
+,{"stream_name":"stderr","time":22.319829884,"data":"2026-06-30 17:50:07.136789: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:467] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered\n"}
+,{"stream_name":"stderr","time":22.319910601,"data":"WARNING: All log messages before absl::InitializeLog() is called are written to STDERR\n"}
+,{"stream_name":"stderr","time":22.319918162,"data":"E0000 00:00:1782841807.324521      23 cuda_dnn.cc:8579] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered\n"}
+,{"stream_name":"stderr","time":22.319923407,"data":"E0000 00:00:1782841807.379100      23 cuda_blas.cc:1407] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered\n"}
+,{"stream_name":"stderr","time":22.319929276,"data":"W0000 00:00:1782841807.825269      23 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.\n"}
+,{"stream_name":"stderr","time":22.319934245,"data":"W0000 00:00:1782841807.825312      23 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.\n"}
+,{"stream_name":"stderr","time":22.31993925,"data":"W0000 00:00:1782841807.825315      23 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.\n"}
+,{"stream_name":"stderr","time":22.32083286,"data":"W0000 00:00:1782841807.825317      23 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.\n"}
+,{"stream_name":"stderr","time":22.525119424,"data":"2026-06-30 17:50:07.136789: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:467] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered\n"}
+,{"stream_name":"stderr","time":22.525148426,"data":"WARNING: All log messages before absl::InitializeLog() is called are written to STDERR\n"}
+,{"stream_name":"stderr","time":22.52516538,"data":"E0000 00:00:1782841807.324521      23 cuda_dnn.cc:8579] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered\n"}
+,{"stream_name":"stderr","time":22.525169731,"data":"E0000 00:00:1782841807.379100      23 cuda_blas.cc:1407] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered\n"}
+,{"stream_name":"stderr","time":22.525174791,"data":"W0000 00:00:1782841807.825269      23 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.\n"}
+,{"stream_name":"stderr","time":22.525178636,"data":"W0000 00:00:1782841807.825312      23 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.\n"}
+,{"stream_name":"stderr","time":22.5251829,"data":"W0000 00:00:1782841807.825315      23 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.\n"}
+,{"stream_name":"stderr","time":22.52518713,"data":"W0000 00:00:1782841807.825317      23 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.\n"}
+,{"stream_name":"stderr","time":22.525191305,"data":"\n"}
+,{"stream_name":"stderr","time":22.5251948,"data":"2026-06-30 17:50:07.136789: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:467] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered\n"}
+,{"stream_name":"stderr","time":22.525199144,"data":"WARNING: All log messages before absl::InitializeLog() is called are written to STDERR\n"}
+,{"stream_name":"stderr","time":22.525203204,"data":"E0000 00:00:1782841807.324521      23 cuda_dnn.cc:8579] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered\n"}
+,{"stream_name":"stderr","time":22.5252075,"data":"E0000 00:00:1782841807.379100      23 cuda_blas.cc:1407] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered\n"}
+,{"stream_name":"stderr","time":22.525213338,"data":"W0000 00:00:1782841807.825269      23 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.\n"}
+,{"stream_name":"stderr","time":22.525217647,"data":"W0000 00:00:1782841807.825312      23 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.\n"}
+,{"stream_name":"stderr","time":22.525222056,"data":"W0000 00:00:1782841807.825315      23 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.\n"}
+,{"stream_name":"stderr","time":22.52522635,"data":"W0000 00:00:1782841807.825317      23 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.\n"}
+,{"stream_name":"stdout","time":34.931428515,"data":"\u001b[0mPyTorch 2.10.0+cu128 | Device: cuda\n"}
+,{"stream_name":"stdout","time":34.931465525,"data":"GPU: Tesla P100-PCIE-16GB\n"}
+,{"stream_name":"stderr","time":34.932667143,"data":"Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.\n"}
+,{"stream_name":"stderr","time":34.932689958,"data":"Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.\n"}
+,{"stream_name":"stderr","time":34.932696428,"data":"Users of this version of Gym should be able to simply replace 'import gym' with 'import gymnasium as gym' in the vast majority of cases.\n"}
+,{"stream_name":"stderr","time":34.932712478,"data":"See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.\n"}
+,{"stream_name":"stderr","time":34.932716378,"data":"/usr/local/lib/python3.12/dist-packages/torch/cuda/__init__.py:435: UserWarning: \n"}
+,{"stream_name":"stderr","time":34.932719848,"data":"    Found GPU0 Tesla P100-PCIE-16GB which is of cuda capability 6.0.\n"}
+,{"stream_name":"stderr","time":34.932723241,"data":"    Minimum and Maximum cuda capability supported by this version of PyTorch is\n"}
+,{"stream_name":"stderr","time":34.932726632,"data":"    (7.0) - (12.0)\n"}
+,{"stream_name":"stderr","time":34.932729902,"data":"    \n"}
+,{"stream_name":"stderr","time":34.932733086,"data":"  queued_call()\n"}
+,{"stream_name":"stderr","time":34.932736432,"data":"/usr/local/lib/python3.12/dist-packages/torch/cuda/__init__.py:435: UserWarning: \n"}
+,{"stream_name":"stderr","time":34.932739928,"data":"    Please install PyTorch with a following CUDA\n"}
+,{"stream_name":"stderr","time":34.932743224,"data":"    configurations:  12.6 following instructions at\n"}
+,{"stream_name":"stderr","time":34.932746536,"data":"    https://pytorch.org/get-started/locally/\n"}
+,{"stream_name":"stderr","time":34.932749926,"data":"    \n"}
+,{"stream_name":"stderr","time":34.932753055,"data":"  queued_call()\n"}
+,{"stream_name":"stderr","time":34.93275641,"data":"/usr/local/lib/python3.12/dist-packages/torch/cuda/__init__.py:435: UserWarning: \n"}
+,{"stream_name":"stderr","time":34.932776897,"data":"Tesla P100-PCIE-16GB with CUDA capability sm_60 is not compatible with the current PyTorch installation.\n"}
+,{"stream_name":"stderr","time":34.932782522,"data":"The current PyTorch install supports CUDA capabilities sm_70 sm_75 sm_80 sm_86 sm_90 sm_100 sm_120.\n"}
+,{"stream_name":"stderr","time":34.932786253,"data":"If you want to use the Tesla P100-PCIE-16GB GPU with PyTorch, please check the instructions at https://pytorch.org/get-started/locally/\n"}
+,{"stream_name":"stderr","time":34.93279196,"data":"\n"}
+,{"stream_name":"stderr","time":34.932795456,"data":"  queued_call()\n"}
+,{"stream_name":"stderr","time":34.932800075,"data":"\n"}
+,{"stream_name":"stderr","time":34.93295267,"data":"Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.\n"}
+,{"stream_name":"stderr","time":34.932995931,"data":"Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.\n"}
+,{"stream_name":"stderr","time":34.933009288,"data":"Users of this version of Gym should be able to simply replace 'import gym' with 'import gymnasium as gym' in the vast majority of cases.\n"}
+,{"stream_name":"stderr","time":34.933013270000004,"data":"See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.\n"}
+,{"stream_name":"stderr","time":34.933016871,"data":"/usr/local/lib/python3.12/dist-packages/torch/cuda/__init__.py:435: UserWarning: \n"}
+,{"stream_name":"stderr","time":34.933020373,"data":"    Found GPU0 Tesla P100-PCIE-16GB which is of cuda capability 6.0.\n"}
+,{"stream_name":"stderr","time":34.933023671,"data":"    Minimum and Maximum cuda capability supported by this version of PyTorch is\n"}
+,{"stream_name":"stderr","time":34.933027114,"data":"    (7.0) - (12.0)\n"}
+,{"stream_name":"stderr","time":34.933030275,"data":"    \n"}
+,{"stream_name":"stderr","time":34.933033521,"data":"  queued_call()\n"}
+,{"stream_name":"stderr","time":34.933048561,"data":"/usr/local/lib/python3.12/dist-packages/torch/cuda/__init__.py:435: UserWarning: \n"}
+,{"stream_name":"stderr","time":34.933055889,"data":"    Please install PyTorch with a following CUDA\n"}
+,{"stream_name":"stderr","time":34.933058413,"data":"    configurations:  12.6 following instructions at\n"}
+,{"stream_name":"stderr","time":34.933060631000004,"data":"    https://pytorch.org/get-started/locally/\n"}
+,{"stream_name":"stderr","time":34.933062869,"data":"    \n"}
+,{"stream_name":"stderr","time":34.933065099,"data":"  queued_call()\n"}
+,{"stream_name":"stderr","time":34.933067259,"data":"/usr/local/lib/python3.12/dist-packages/torch/cuda/__init__.py:435: UserWarning: \n"}
+,{"stream_name":"stderr","time":34.933069546,"data":"Tesla P100-PCIE-16GB with CUDA capability sm_60 is not compatible with the current PyTorch installation.\n"}
+,{"stream_name":"stderr","time":34.933071908,"data":"The current PyTorch install supports CUDA capabilities sm_70 sm_75 sm_80 sm_86 sm_90 sm_100 sm_120.\n"}
+,{"stream_name":"stderr","time":34.93307438,"data":"If you want to use the Tesla P100-PCIE-16GB GPU with PyTorch, please check the instructions at https://pytorch.org/get-started/locally/\n"}
+,{"stream_name":"stderr","time":34.933076801,"data":"\n"}
+,{"stream_name":"stderr","time":34.933078985,"data":"  queued_call()\n"}
+,{"stream_name":"stdout","time":35.249513555,"data":"Data dir  : data/raw\n"}
+,{"stream_name":"stdout","time":35.249543243,"data":"Ticker    : aapl  →  lobster_aapl_10_level.csv\n"}
+,{"stream_name":"stdout","time":35.249548829,"data":"Timesteps : 50,000  |  Reward: log_return\n"}
+,{"stream_name":"stdout","time":35.249552325,"data":"Train/test: 80% / 20%  |  Window: 10 hrs  |  Macro dim: 384\n"}
+,{"stream_name":"stdout","time":35.249556387,"data":"Benchmark : off\n"}
+,{"stream_name":"stdout","time":35.456657387999996,"data":"No pre-built CSV found for ticker 'aapl'. Parsing / generating data...\n"}
+,{"stream_name":"stdout","time":35.456691055,"data":"No orderbook file found for AAPL. Generating synthetic data...\n"}
+,{"stream_name":"stdout","time":35.507499091,"data":"Synthetic: 5000 ticks saved to synthetic_lob_10_level.csv\n"}
+,{"stream_name":"stdout","time":35.557411753,"data":"\n"}
+,{"stream_name":"stdout","time":35.557440137,"data":"Loaded: synthetic_lob_10_level.csv\n"}
+,{"stream_name":"stdout","time":35.557445502,"data":"Shape : (5000, 42)  (5,000 ticks, 42 cols)\n"}
+,{"stream_name":"stdout","time":35.557454131,"data":"Cols  : ['timestamp', 'symbol', 'bid_price_1', 'ask_price_1', 'bid_size_1', 'ask_size_1'] ...\n"}
+,{"stream_name":"stdout","time":64.349716102,"data":"No OPENROUTER_API_KEY set — env will use randomly generated macro vectors.\n"}
+,{"stream_name":"stderr","time":67.937429778,"data":"Traceback (most recent call last):\n"}
+,{"stream_name":"stderr","time":67.937470828,"data":"  File \"\u003cstring\u003e\", line 1, in \u003cmodule\u003e\n"}
+,{"stream_name":"stderr","time":67.937503863,"data":"  File \"/usr/local/lib/python3.12/dist-packages/papermill/execute.py\", line 131, in execute_notebook\n"}
+,{"stream_name":"stderr","time":67.937571805,"data":"    raise_for_execution_errors(nb, output_path)\n"}
+,{"stream_name":"stderr","time":67.937654384,"data":"  File \"/usr/local/lib/python3.12/dist-packages/papermill/execute.py\", line 251, in raise_for_execution_errors\n"}
+,{"stream_name":"stderr","time":67.937806891,"data":"    raise error\n"}
+,{"stream_name":"stderr","time":67.938260963,"data":"papermill.exceptions.PapermillExecutionError: \n"}
+,{"stream_name":"stderr","time":67.938276801,"data":"---------------------------------------------------------------------------\n"}
+,{"stream_name":"stderr","time":67.938330989,"data":"Exception encountered at \"In [7]\":\n"}
+,{"stream_name":"stderr","time":67.938335633,"data":"---------------------------------------------------------------------------\n"}
+,{"stream_name":"stderr","time":67.938339754,"data":"AcceleratorError                          Traceback (most recent call last)\n"}
+,{"stream_name":"stderr","time":67.938343398,"data":"/tmp/ipykernel_23/1483075072.py in \u003ccell line: 0\u003e()\n"}
+,{"stream_name":"stderr","time":67.938347369,"data":"     34 _m = CVML().to(DEVICE)\n"}
+,{"stream_name":"stderr","time":67.938351534,"data":"     35 _x = torch.randn(4, 40).to(DEVICE)\n"}
+,{"stream_name":"stderr","time":67.938355943,"data":"---\u003e 36 print(f\"CVML: {_x.shape} → {_m(_x).shape}\")\n"}
+,{"stream_name":"stderr","time":67.938360738,"data":"     37 del _m, _x\n"}
+,{"stream_name":"stderr","time":67.938364198,"data":"\n"}
+,{"stream_name":"stderr","time":67.938367602,"data":"/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py in _wrapped_call_impl(self, *args, **kwargs)\n"}
+,{"stream_name":"stderr","time":67.93837116,"data":"   1774             return self._compiled_call_impl(*args, **kwargs)  # type: ignore[misc]\n"}
+,{"stream_name":"stderr","time":67.938375305,"data":"   1775         else:\n"}
+,{"stream_name":"stderr","time":67.938378775,"data":"-\u003e 1776             return self._call_impl(*args, **kwargs)\n"}
+,{"stream_name":"stderr","time":67.938382172,"data":"   1777 \n"}
+,{"stream_name":"stderr","time":67.938385458,"data":"   1778     # torchrec tests the code consistency with the following code\n"}
+,{"stream_name":"stderr","time":67.938388872,"data":"\n"}
+,{"stream_name":"stderr","time":67.938392064,"data":"/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py in _call_impl(self, *args, **kwargs)\n"}
+,{"stream_name":"stderr","time":67.938396146,"data":"   1785                 or _global_backward_pre_hooks or _global_backward_hooks\n"}
+,{"stream_name":"stderr","time":67.93839986,"data":"   1786                 or _global_forward_hooks or _global_forward_pre_hooks):\n"}
+,{"stream_name":"stderr","time":67.938403573,"data":"-\u003e 1787             return forward_call(*args, **kwargs)\n"}
+,{"stream_name":"stderr","time":67.938407224,"data":"   1788 \n"}
+,{"stream_name":"stderr","time":67.938410677,"data":"   1789         result = None\n"}
+,{"stream_name":"stderr","time":67.93841431,"data":"\n"}
+,{"stream_name":"stderr","time":67.93841785,"data":"/tmp/ipykernel_23/1483075072.py in forward(self, x)\n"}
+,{"stream_name":"stderr","time":67.938421564,"data":"     26         B = x.shape[0]\n"}
+,{"stream_name":"stderr","time":67.938425054,"data":"     27         x = x.view(B, self.in_channels, self.levels, 1)\n"}
+,{"stream_name":"stderr","time":67.938428495,"data":"---\u003e 28         x = self.activation(self.depthwise(x))\n"}
+,{"stream_name":"stderr","time":67.938432159,"data":"     29         x = self.activation(self.pointwise(x))\n"}
+,{"stream_name":"stderr","time":67.93843581,"data":"     30         x = self.projection(self.flatten(x))\n"}
+,{"stream_name":"stderr","time":67.93843963,"data":"\n"}
+,{"stream_name":"stderr","time":67.938443283,"data":"/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py in _wrapped_call_impl(self, *args, **kwargs)\n"}
+,{"stream_name":"stderr","time":67.938447119,"data":"   1774             return self._compiled_call_impl(*args, **kwargs)  # type: ignore[misc]\n"}
+,{"stream_name":"stderr","time":67.93845099,"data":"   1775         else:\n"}
+,{"stream_name":"stderr","time":67.938454636,"data":"-\u003e 1776             return self._call_impl(*args, **kwargs)\n"}
+,{"stream_name":"stderr","time":67.938463095,"data":"   1777 \n"}
+,{"stream_name":"stderr","time":67.938466882,"data":"   1778     # torchrec tests the code consistency with the following code\n"}
+,{"stream_name":"stderr","time":67.938471288,"data":"\n"}
+,{"stream_name":"stderr","time":67.938475214,"data":"/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py in _call_impl(self, *args, **kwargs)\n"}
+,{"stream_name":"stderr","time":67.93848056,"data":"   1785                 or _global_backward_pre_hooks or _global_backward_hooks\n"}
+,{"stream_name":"stderr","time":67.9384846,"data":"   1786                 or _global_forward_hooks or _global_forward_pre_hooks):\n"}
+,{"stream_name":"stderr","time":67.938488766,"data":"-\u003e 1787             return forward_call(*args, **kwargs)\n"}
+,{"stream_name":"stderr","time":67.938492878,"data":"   1788 \n"}
+,{"stream_name":"stderr","time":67.938496367,"data":"   1789         result = None\n"}
+,{"stream_name":"stderr","time":67.938500188,"data":"\n"}
+,{"stream_name":"stderr","time":67.938503684,"data":"/usr/local/lib/python3.12/dist-packages/torch/nn/modules/conv.py in forward(self, input)\n"}
+,{"stream_name":"stderr","time":67.938507916,"data":"    551 \n"}
+,{"stream_name":"stderr","time":67.938511855,"data":"    552     def forward(self, input: Tensor) -\u003e Tensor:\n"}
+,{"stream_name":"stderr","time":67.93851619,"data":"--\u003e 553         return self._conv_forward(input, self.weight, self.bias)\n"}
+,{"stream_name":"stderr","time":67.938520439,"data":"    554 \n"}
+,{"stream_name":"stderr","time":67.938523958,"data":"    555 \n"}
+,{"stream_name":"stderr","time":67.938527943,"data":"\n"}
+,{"stream_name":"stderr","time":67.938531824,"data":"/usr/local/lib/python3.12/dist-packages/torch/nn/modules/conv.py in _conv_forward(self, input, weight, bias)\n"}
+,{"stream_name":"stderr","time":67.938535857,"data":"    546             )\n"}
+,{"stream_name":"stderr","time":67.938539828,"data":"    547 \n"}
+,{"stream_name":"stderr","time":67.938543291,"data":"--\u003e 548         return F.conv2d(\n"}
+,{"stream_name":"stderr","time":67.938546926,"data":"    549             input, weight, bias, self.stride, self.padding, self.dilation, self.groups\n"}
+,{"stream_name":"stderr","time":67.938551774,"data":"    550         )\n"}
+,{"stream_name":"stderr","time":67.93855537499999,"data":"\n"}
+,{"stream_name":"stderr","time":67.938558861,"data":"AcceleratorError: CUDA error: no kernel image is available for execution on the device\n"}
+,{"stream_name":"stderr","time":67.938562742,"data":"Search for `cudaErrorNoKernelImageForDevice' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.\n"}
+,{"stream_name":"stderr","time":67.938566798,"data":"CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.\n"}
+,{"stream_name":"stderr","time":67.938570896,"data":"For debugging consider passing CUDA_LAUNCH_BLOCKING=1\n"}
+,{"stream_name":"stderr","time":67.938574681,"data":"Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.\n"}
+,{"stream_name":"stderr","time":67.938578736,"data":"\n"}
+,{"stream_name":"stderr","time":67.938582184,"data":"\n"}
+,{"stream_name":"stderr","time":70.12337965,"data":"/usr/local/lib/python3.12/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":70.123413792,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":70.276437017,"data":"/usr/local/lib/python3.12/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":70.276478995,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":70.885838211,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to notebook\n"}
+,{"stream_name":"stderr","time":71.252942852,"data":"[NbConvertApp] Writing 110688 bytes to __notebook__.ipynb\n"}
+,{"stream_name":"stderr","time":73.677790019,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to html\n"}
+,{"stream_name":"stderr","time":74.769400453,"data":"[NbConvertApp] Writing 587179 bytes to __results__.html\n"}
+]

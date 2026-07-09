@@ -1,0 +1,16 @@
+{
+  "id": "niko980/drl-trading-pipeline",
+  "title": "DRL Trading Pipeline",
+  "code_file": "drl_trading_pipeline.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_internet": true,
+  "dataset_sources": [
+    "niko980/drl-trading-lob-data"
+  ],
+  "competition_sources": [],
+  "kernel_sources": [],
+  "model_sources": []
+}
